@@ -19,23 +19,27 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const gq = __importStar(require("graphql"));
-const rootSchema = new gq.GraphQLSchema({
-    query: new gq.GraphQLObjectType({
-        name: 'Query',
-        fields: () => ({
-            getResponse: {
-                type: gq.GraphQLString,
-                resolve: function (parent, args, context, info) {
-                    return 'hi';
-                },
-            },
-        }),
-    }),
-    // mutation: new gq.GraphQLObjectType({
-    // 	name: 'Mutation',
-    // 	fields: () => ({
-    // 	}),
-    // }),
+exports.DateType = void 0;
+const graphql = __importStar(require("graphql"));
+exports.DateType = new graphql.GraphQLScalarType({
+    name: 'Date',
+    serialize(value) {
+        console.log(value);
+        return value.getTime();
+    },
+    parseValue(value) { },
 });
-exports.default = rootSchema;
+// id: string;
+// 	name: string;
+// 	category: string[];
+// 	rating: number;
+// 	location: string[];
+// 	duration: string;
+// 	description: string;
+// 	features: string[];
+// 	createdat: Date;
+// 	price: number;
+// 	discount: number;
+// 	mainImage: string;
+// 	images: string[];
+// 	createdBy: string;

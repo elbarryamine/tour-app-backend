@@ -1,13 +1,5 @@
-import * as graphql from 'graphql';
-
-export const DateType = new graphql.GraphQLScalarType({
-	name: 'Date',
-	serialize(value: any) {
-		console.log(value);
-		return value.getTime();
-	},
-	parseValue(value: any) {},
-});
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // id: string;
 // 	name: string;
 // 	category: string[];

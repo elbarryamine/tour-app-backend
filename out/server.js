@@ -18,15 +18,6 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -34,31 +25,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const express_graphql_1 = require("express-graphql");
-const graphql_1 = __importDefault(require("./graphql"));
-const middleware_1 = __importDefault(require("./graphql/middleware"));
-const mongoose_1 = require("mongoose");
+const dev_1 = __importDefault(require("./dev"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
-console.log(process.env.MongoDbUser);
-function mongodbConnect() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            yield (0, mongoose_1.connect)(`mongodb+srv://${process.env.MongoDbUser}:${process.env.MongoDbPassword}@cluster0.rldb1.mongodb.net/${process.env.MongoDbName}?retryWrites=true&w=majority`);
-            console.log('connected');
-        }
-        catch (e) {
-            console.log(e);
-        }
-    });
-}
-mongodbConnect();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
-app.use('/graphql', middleware_1.default, (0, express_graphql_1.graphqlHTTP)({
-    schema: graphql_1.default,
+app.use('/graphql', (0, express_graphql_1.graphqlHTTP)({
+    schema: dev_1.default,
     graphiql: true,
 }));
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
-    console.log('listening');
+    console.log(`listening on port ${port}`);
 });
