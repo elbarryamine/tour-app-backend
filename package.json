@@ -6,7 +6,9 @@
 	"license": "MIT",
 	"scripts": {
 		"start": "nodemon ./out/server.js",
-		"tsc": "tsc"
+		"tsc": "tsc -w",
+		"migrate": "knex migrate:latest --knexfile ./out/db/kenxfile.js",
+		"seed": "knex migrate:make tables --knexfile ./out/db/kenxfile.js"
 	},
 	"dependencies": {
 		"@types/cors": "^2.8.12",

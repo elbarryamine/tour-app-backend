@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { graphqlHTTP } from 'express-graphql';
-import rootSchema from './dev';
+import rootSchema from './schema';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
