@@ -12,6 +12,9 @@ module.exports = {
 			port: 3306,
 		},
 		migrations: {},
+		seeds: {
+			directory: './seeds',
+		},
 	},
 
 	staging: {

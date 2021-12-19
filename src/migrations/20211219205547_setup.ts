@@ -30,6 +30,7 @@ export async function up(knex: Knex): Promise<void> {
 				.notNullable()
 				.references('id')
 				.inTable('user')
+				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
 			table.uuid('id').primary();
@@ -48,6 +49,7 @@ export async function up(knex: Knex): Promise<void> {
 				.notNullable()
 				.references('id')
 				.inTable('tour')
+				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 			table.timestamp('startDate');
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
@@ -61,12 +63,14 @@ export async function up(knex: Knex): Promise<void> {
 				.notNullable()
 				.references('id')
 				.inTable('tour')
+				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 			table
 				.uuid('userId')
 				.notNullable()
 				.references('id')
 				.inTable('user')
+				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 			table.uuid('id').primary();
 		});
