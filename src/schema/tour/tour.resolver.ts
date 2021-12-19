@@ -1,7 +1,14 @@
+import knex from '../../db';
 export async function createTourResolver(parents: any, args: any, ctx: any) {
-	// await knex.table("")
 	return false;
 }
-export function getToursResolver(parents: any, args: any, ctx: any) {
-	return [];
+export async function getToursResolver(parents: any, args: any, ctx: any) {
+	try {
+		const tours = await knex('tour').select('*');
+		console.log(tours);
+		return [];
+	} catch (e) {
+		console.log(e);
+		return [];
+	}
 }
