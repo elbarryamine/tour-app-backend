@@ -1,10 +1,23 @@
 import knex from '../../db';
 import { validateTour } from '../../functions/validate';
-export async function createTourResolver(parents: any, args: any, ctx: any) {
+import { tourArgs } from './tour.types';
+type TypeTourArgs = typeof tourArgs;
+export async function createTourResolver(
+	parents: any,
+	args: TypeTourArgs,
+	ctx: any
+) {
 	if (validateTour(args)) {
+		knex
+			.transaction(async (trx) => {
+				trx('tour').insert({ ...args });
+			})
+			.catch(() => {
+				throw new Error('Something Went Wrong');
+			});
 		return true;
 	} else {
-		return false;
+		throw new Error('Invalid Data');
 	}
 }
 export async function getToursResolver(parents: any, args: any, ctx: any) {
@@ -16,8 +29,7 @@ export async function getToursResolver(parents: any, args: any, ctx: any) {
 					resolve(tours);
 				})
 				.catch((err) => {
-					console.error(err);
-					throw err;
+					throw new Error('Something Went Wrong');
 				});
 		});
 	} catch (e) {

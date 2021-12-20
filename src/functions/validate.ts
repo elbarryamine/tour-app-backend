@@ -1,15 +1,5 @@
 import Joi from 'joi';
-export function validateTour(tour: {
-	name: string;
-	duration: string;
-	description: string;
-	price: string;
-	discount: string;
-	location: Array<string>;
-	features: Array<string>;
-	rating: number;
-	category: Array<string>;
-}) {
+export function validateTour(tour: any) {
 	const schema = Joi.object({
 		name: Joi.string().min(3).max(255).required().alphanum(),
 		duration: Joi.string().min(1).max(255).required().alphanum(),
