@@ -1,5 +1,5 @@
 import * as Graphql from 'graphql';
-import { tourType, tourArgs } from './tour/tour.types';
+import { tourType, tourArgs, tourArgsImages } from './tour/tour.types';
 import { createTourResolver, getToursResolver } from './tour/tour.resolver';
 
 const rootSchema = new Graphql.GraphQLSchema({

@@ -16,6 +16,9 @@ app.use(
 );
 
 const port = process.env.PORT || 3000;
+process.on('unhandledRejection', (err: any) => {
+	console.error(err.message);
+});
 app.listen(port, () => {
 	console.log(`listening on port ${port}`);
 });

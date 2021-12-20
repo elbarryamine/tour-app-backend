@@ -2,9 +2,10 @@ import * as Graphql from 'graphql';
 
 export const tourType = new Graphql.GraphQLObjectType({
 	name: 'Tour',
-	fields: () => tourArgs,
+	fields: () => {
+		return { ...tourArgs, ...tourArgsImages };
+	},
 });
-
 export const tourArgs = {
 	name: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
@@ -39,6 +40,8 @@ export const tourArgs = {
 	discount: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
+};
+export const tourArgsImages = {
 	mainImage: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
