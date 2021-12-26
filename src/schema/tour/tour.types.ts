@@ -1,12 +1,12 @@
 import * as Graphql from 'graphql';
 
-export const tourType = new Graphql.GraphQLObjectType({
-	name: 'Tour',
+export const GetTourType = new Graphql.GraphQLObjectType({
+	name: 'CreateTour',
 	fields: () => {
-		return { ...tourArgs, ...tourArgsImages };
+		return { ...TourType, ...TourTypeImages };
 	},
 });
-export const tourArgs = {
+export const TourType = {
 	name: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
@@ -41,7 +41,7 @@ export const tourArgs = {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
 };
-export const tourArgsImages = {
+export const TourTypeImages = {
 	mainImage: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
@@ -51,3 +51,6 @@ export const tourArgsImages = {
 		),
 	},
 };
+
+// fix type TourInterface
+export type TourInterface = typeof TourType;

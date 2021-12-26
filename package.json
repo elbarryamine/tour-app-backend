@@ -10,6 +10,7 @@
 		"migrate": "knex migrate:latest --migrations-directory ./out/migrations"
 	},
 	"dependencies": {
+		"@types/bcrypt": "^5.0.0",
 		"@types/cors": "^2.8.12",
 		"@types/dotenv": "^8.2.0",
 		"@types/express": "^4.17.13",
@@ -19,6 +20,7 @@
 		"@types/graphql-upload": "^8.0.7",
 		"@types/joi": "^17.2.3",
 		"@types/multer": "^1.4.7",
+		"bcrypt": "^5.0.1",
 		"cors": "^2.8.5",
 		"dotenv": "^10.0.0",
 		"express": "^4.17.1",

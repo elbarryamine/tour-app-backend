@@ -8,7 +8,6 @@ export async function seed(knex: Knex): Promise<void> {
 	// await knex('notification').del();
 	// await knex('booking').del();
 	// await knex('review').del();
-
 	// Inserts seed entries
 	let seedsUser = [];
 	for (let i = 0; i < 10; i++) {

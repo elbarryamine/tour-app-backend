@@ -10,9 +10,6 @@ const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 app.use(cors());
-app.post('/file', upload.single('avatar'), (req, res, next) => {
-	console.log(req.file);
-});
 
 app.use(
 	'/graphql',

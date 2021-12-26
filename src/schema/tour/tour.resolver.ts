@@ -1,10 +1,10 @@
 import knex from '../../db';
 import { validateTour } from '../../functions/validate';
-import { tourArgs } from './tour.types';
-type TypeTourArgs = typeof tourArgs;
+import { TourInterface } from './tour.types';
+
 export async function createTourResolver(
 	parents: any,
-	args: TypeTourArgs,
+	args: TourInterface,
 	ctx: any
 ) {
 	if (validateTour(args)) {
@@ -20,9 +20,13 @@ export async function createTourResolver(
 		throw new Error('Invalid Data');
 	}
 }
-export async function getToursResolver(parents: any, args: any, ctx: any) {
+export async function getToursResolver(
+	parents: any,
+	args: TourInterface,
+	ctx: any
+) {
 	try {
-		return new Promise((resolve, reject) => {
+		return new Promise((resolve, _) => {
 			knex
 				.transaction(async (trx) => {
 					const tours = await trx('tour').select('*');
@@ -35,4 +39,10 @@ export async function getToursResolver(parents: any, args: any, ctx: any) {
 	} catch (e) {
 		return [];
 	}
+}
+
+export async function updateTour(_: never, args: TourInterface) {
+	knex.transaction((trx) => {
+		// trx("tour")
+	});
 }

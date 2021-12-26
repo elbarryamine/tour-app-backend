@@ -6,16 +6,16 @@ export async function up(knex: Knex): Promise<void> {
 			table.string('firstName', 255).notNullable();
 			table.string('lastName', 255).notNullable();
 			table.string('email', 255).notNullable();
-			table.string('phone', 255).notNullable();
+			table.string('phone', 255);
 			table.string('password', 255).notNullable();
 			table.timestamp('birthDate').notNullable();
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
-			table.string('avatar').notNullable();
+			table.string('avatar');
 			table.uuid('id').primary();
 		})
 		.createTable('tour', function (table) {
 			table.string('name', 255).notNullable();
-			table.enu('rating', [1, 2, 3, 4, 5]).notNullable();
+			table.integer('rating').notNullable();
 			table.string('duration').notNullable();
 			table.string('description').notNullable();
 			table.string('price').notNullable();

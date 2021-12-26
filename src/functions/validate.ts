@@ -18,3 +18,21 @@ export function validateTour(tour: any) {
 		return true;
 	}
 }
+
+export function validateUserSignUp(user: any) {
+	const schema = Joi.object({
+		firstName: Joi.string().required(),
+		lastName: Joi.string().required(),
+		email: Joi.string().required(),
+		phone: Joi.string(),
+		password: Joi.string().required(),
+		passwordConfirm: Joi.string().required(),
+		birthDate: Joi.string().required(),
+	});
+	const result = schema.validate(user);
+	if (result.error || result.warning) {
+		return false;
+	} else {
+		return true;
+	}
+}
