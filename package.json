@@ -6,7 +6,7 @@
 	"license": "MIT",
 	"scripts": {
 		"start:dev": "nodemon ./out/src/server.js",
-		"start": "nodemon ./server.js",
+		"start": "node ./out/src/server.js",
 		"tsc": "tsc -w",
 		"migrate": "knex migrate:latest --migrations-directory ./out/migrations"
 	},
