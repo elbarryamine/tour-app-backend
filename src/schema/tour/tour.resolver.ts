@@ -8,6 +8,7 @@ import {
 	DeleteTourArgsInterface,
 } from './tours.interfaces';
 import { errors } from '../../services/errors';
+import { VerifyToken } from '../../services/functions/verifyToken';
 
 export async function getToursResolver() {
 	try {
@@ -63,11 +64,14 @@ export async function searchToursResolver(
 }
 export async function createTourResolver(
 	_: any,
-	args: CreateTourArgsInterface
+	args: CreateTourArgsInterface,
+	ctx: any
 ) {
 	try {
 		// check if have access
-		if (!validateTour(args)) throw new Error(errors.invalid_fields);
+		VerifyToken(ctx);
+		if (!validateTour(args))
+			throw new Error(errors.missing_access_permission);
 		return await knex.transaction(
 			async (trx: Knex.Transaction<CreateTourArgsInterface, any[]>) => {
 				const tour = {
@@ -113,9 +117,11 @@ export async function createTourResolver(
 
 export async function deleteTourResolver(
 	_: any,
-	args: DeleteTourArgsInterface
+	args: DeleteTourArgsInterface,
+	ctx: any
 ) {
 	// check if have access
+	VerifyToken(ctx);
 	try {
 		await knex
 			.table('tour')

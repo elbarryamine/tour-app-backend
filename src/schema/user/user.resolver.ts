@@ -58,7 +58,7 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
 	// look for provided username in db
 	try {
 		return await knex.transaction(
-			async (trx: Knex.Transaction<UserSignInType, any[]>) => {
+			async (trx: Knex.Transaction<UserSignUpType, any[]>) => {
 				const user = await trx('user')
 					.where('email', '=', args.email)
 					.first();
@@ -72,9 +72,13 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
 				if (!isValidPassword) {
 					throw new Error(errors.wrong_email_or_password);
 				}
-				const accessToken = Jwt.sign(user, process.env.PRIVATE_KEY, {
-					expiresIn: '3d',
-				});
+				const accessToken = Jwt.sign(
+					{ id: user.id },
+					process.env.PRIVATE_KEY,
+					{
+						expiresIn: '3d',
+					}
+				);
 				return accessToken;
 			}
 		);
