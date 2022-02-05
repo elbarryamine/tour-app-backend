@@ -1,12 +1,12 @@
 import { Knex } from 'knex';
 import knex from '../../db';
 import { validateTour } from '../../functions/validate';
-// import { validateTour } from '../../functions/validate';
 import {
 	TourArgsInterface,
 	TourSearchArgsInterface,
 	CreateTourArgsInterface,
-} from './tour.types';
+	DeleteTourArgsInterface,
+} from './tours.interfaces';
 
 export async function getToursResolver() {
 	try {
@@ -65,6 +65,7 @@ export async function createTourResolver(
 	args: CreateTourArgsInterface
 ) {
 	try {
+		// check if have access
 		if (!validateTour(args)) throw new Error('Invalid tour fileds');
 		return new Promise((resolve, _) => {
 			knex.transaction(
@@ -108,5 +109,18 @@ export async function createTourResolver(
 		});
 	} catch (e) {
 		return [];
+	}
+}
+
+export async function deleteTourResolver(
+	_: any,
+	args: DeleteTourArgsInterface
+) {
+	// check if have access
+	try {
+		await knex.table('tour').where('id', '=', args.id).del();
+		return true;
+	} catch (e) {
+		return false;
 	}
 }

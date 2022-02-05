@@ -2,12 +2,13 @@ import * as Graphql from 'graphql';
 import {
 	TourSchema,
 	CreateTourSchema,
-	TourArgs,
 	TourSearchArgs,
 	createTourArgs,
+	deleteTourArgs,
 } from './tour/tour.types';
 import {
 	createTourResolver,
+	deleteTourResolver,
 	getToursResolver,
 	searchToursResolver,
 } from './tour/tour.resolver';
@@ -45,6 +46,11 @@ const rootSchema = new Graphql.GraphQLSchema({
 				type: CreateTourSchema,
 				args: createTourArgs,
 				resolve: createTourResolver,
+			},
+			deleteTour: {
+				type: Graphql.GraphQLBoolean,
+				args: deleteTourArgs,
+				resolve: deleteTourResolver,
 			},
 		}),
 	}),
