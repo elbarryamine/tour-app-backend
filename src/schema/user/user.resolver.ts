@@ -25,13 +25,17 @@ export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {
 			.catch((err) => {
 				throw new Error(err);
 			});
-		const isUserHasSameEmail = userInDb.email === args.email ? true : false;
-		if (isUserHasSameEmail) {
-			throw new Error(errors.user_with_same_email_exist);
-		}
-		const isUserHasSamePhone = userInDb.phone === args.phone ? true : false;
-		if (isUserHasSamePhone) {
-			throw new Error(errors.user_with_same_phone_exist);
+		if (userInDb) {
+			const isUserHasSameEmail =
+				userInDb.email === args.email ? true : false;
+			const isUserHasSamePhone =
+				userInDb.phone === args.phone ? true : false;
+			if (isUserHasSameEmail) {
+				throw new Error(errors.user_with_same_email_exist);
+			}
+			if (isUserHasSamePhone) {
+				throw new Error(errors.user_with_same_phone_exist);
+			}
 		}
 		const user: FormData = { ...args };
 		delete user.passwordConfirm;
