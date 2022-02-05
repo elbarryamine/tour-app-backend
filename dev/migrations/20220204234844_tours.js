@@ -3,9 +3,10 @@ exports.up = async function (knex) {
 		.createTable('user', function (table) {
 			table.string('firstName', 255).notNullable();
 			table.string('lastName', 255).notNullable();
-			table.string('email', 255).notNullable();
-			table.string('phone', 255);
+			table.unique('email', 255).notNullable();
+			table.unique('phone', 255);
 			table.string('password', 255).notNullable();
+			table.string('roles', 255).notNullable().defaultTo('none');
 			table.timestamp('birthDate').notNullable();
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
 			table.string('avatar');
