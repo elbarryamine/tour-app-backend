@@ -8,7 +8,6 @@ import multer from 'multer';
 import tourRouter from './router/tours';
 dotenv.config();
 const upload = multer({ dest: 'uploads/' });
-
 const app = express();
 app.use(cors());
 
