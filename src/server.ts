@@ -12,6 +12,9 @@ const upload = multer({ dest: 'uploads/' });
 const app = express();
 app.use(cors());
 
+app.get('/', (req, res) => {
+	res.send('Working');
+});
 app.use(tourRouter);
 app.use(
 	'/graphql',

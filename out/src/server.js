@@ -33,6 +33,9 @@ dotenv.config();
 const upload = (0, multer_1.default)({ dest: 'uploads/' });
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
+app.get('/', (req, res) => {
+    res.send('Working');
+});
 app.use(tours_1.default);
 app.use('/graphql', (0, express_graphql_1.graphqlHTTP)({
     schema: schema_1.default,
