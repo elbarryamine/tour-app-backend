@@ -29,13 +29,12 @@ exports.seed = async function (knex) {
 	let seedsTour = [];
 	for (let i = 0; i < 10; i++) {
 		seedsTour.push({
-			id: i,
 			name: faker.name.title(),
 			rating: faker.datatype.number({ min: 1, max: 5 }),
-			duration: faker.datatype.number(),
+			duration: faker.datatype.string(),
 			description: faker.lorem.words(),
 			price: faker.datatype.number(),
-			discount: faker.random.words(),
+			discount: faker.datatype.number(),
 			mainImage: faker.random.words(),
 			images: JSON.stringify([
 				faker.random.image(),

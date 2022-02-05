@@ -9,7 +9,7 @@ exports.up = async function (knex) {
 			table.timestamp('birthDate').notNullable();
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
 			table.string('avatar');
-			table.uuid('id').primary();
+			table.uuid('id').primary().defaultTo(knex.raw('(UUID())'));
 		})
 		.createTable('tour', function (table) {
 			table.string('name', 255).notNullable();
@@ -17,7 +17,7 @@ exports.up = async function (knex) {
 			table.string('duration').notNullable();
 			table.string('description').notNullable();
 			table.integer('price').notNullable();
-			table.string('discount').notNullable();
+			table.integer('discount').notNullable();
 			table.string('mainImage').notNullable();
 			table.json('images').notNullable();
 			table.json('location').notNullable();
@@ -31,14 +31,14 @@ exports.up = async function (knex) {
 				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
-			table.uuid('id').primary();
+			table.uuid('id').primary().defaultTo(knex.raw('(UUID())'));
 		})
 		.createTable('notification', function (table) {
 			table.string('title', 255).notNullable();
 			table.string('description', 255).notNullable();
 			table.string('image').notNullable();
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
-			table.uuid('id').primary();
+			table.uuid('id').primary().defaultTo(knex.raw('(UUID())'));
 		})
 		.createTable('booking', function (table) {
 			table.string('title', 255).notNullable();
@@ -51,7 +51,7 @@ exports.up = async function (knex) {
 				.onDelete('CASCADE');
 			table.timestamp('startDate');
 			table.timestamp('createdAt').defaultTo(knex.fn.now());
-			table.uuid('id').primary();
+			table.uuid('id').primary().defaultTo(knex.raw('(UUID())'));
 		})
 		.createTable('review', function (table) {
 			table.enu('rating', [1, 2, 3, 4, 5]).notNullable();
@@ -70,7 +70,7 @@ exports.up = async function (knex) {
 				.inTable('user')
 				.onUpdate('CASCADE')
 				.onDelete('CASCADE');
-			table.uuid('id').primary();
+			table.uuid('id').primary().defaultTo(knex.raw('(UUID())'));
 		});
 };
 

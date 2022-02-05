@@ -29,7 +29,7 @@ const rootSchema = new Graphql.GraphQLSchema({
         name: 'Query',
         fields: () => ({
             getTours: {
-                type: new Graphql.GraphQLList(tour_types_1.GetTourSchema),
+                type: new Graphql.GraphQLList(tour_types_1.TourSchema),
                 resolve: tour_resolver_1.getToursResolver,
             },
             signIn: {
@@ -43,13 +43,18 @@ const rootSchema = new Graphql.GraphQLSchema({
         fields: () => ({
             signUp: {
                 type: Graphql.GraphQLBoolean,
-                args: user_types_1.UserSignInSchemaType,
+                args: user_types_1.UserSignInSchemaArgs,
                 resolve: user_resolver_1.signUpUser,
             },
             searchTour: {
-                type: new Graphql.GraphQLList(tour_types_1.GetTourSchema),
+                type: new Graphql.GraphQLList(tour_types_1.TourSchema),
                 args: tour_types_1.TourSearchArgs,
                 resolve: tour_resolver_1.searchToursResolver,
+            },
+            createTour: {
+                type: tour_types_1.CreateTourSchema,
+                args: tour_types_1.createTourArgs,
+                resolve: tour_resolver_1.createTourResolver,
             },
         }),
     }),

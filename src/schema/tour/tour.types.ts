@@ -1,17 +1,18 @@
 import * as Graphql from 'graphql';
 
-export const GetTourSchema = new Graphql.GraphQLObjectType({
+export const TourSchema = new Graphql.GraphQLObjectType({
 	name: 'Tour',
 	fields() {
-		return { ...TourArgs, ...TourImagesArgs };
+		return TourArgs;
 	},
 });
-export const SearchTourSchema = new Graphql.GraphQLObjectType({
-	name: 'SearchTour',
+export const CreateTourSchema = new Graphql.GraphQLObjectType({
+	name: 'CreateTour',
 	fields() {
-		return TourSearchArgs;
+		return TourArgs;
 	},
 });
+
 export const TourArgs = {
 	name: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
@@ -41,13 +42,11 @@ export const TourArgs = {
 		),
 	},
 	price: {
-		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
 	},
 	discount: {
-		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
 	},
-};
-export const TourImagesArgs = {
 	mainImage: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
@@ -55,6 +54,9 @@ export const TourImagesArgs = {
 		type: new Graphql.GraphQLNonNull(
 			new Graphql.GraphQLList(Graphql.GraphQLString)
 		),
+	},
+	createdBy: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
 };
 export const TourSearchArgs = {
@@ -78,19 +80,68 @@ export const TourSearchArgs = {
 	},
 };
 
+export const createTourArgs = {
+	name: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+	},
+	category: {
+		type: new Graphql.GraphQLNonNull(
+			new Graphql.GraphQLList(Graphql.GraphQLString)
+		),
+	},
+	rating: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+	},
+	location: {
+		type: new Graphql.GraphQLNonNull(
+			new Graphql.GraphQLList(Graphql.GraphQLString)
+		),
+	},
+	duration: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+	},
+	description: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+	},
+	features: {
+		type: new Graphql.GraphQLNonNull(
+			new Graphql.GraphQLList(Graphql.GraphQLString)
+		),
+	},
+	price: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+	},
+	discount: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+	},
+};
 // fix type TourInterface
 export type TourArgsInterface = {
 	name: string;
-	category: string[];
+	category: string;
 	rating: number;
-	location: string[];
+	location: string;
 	duration: string;
 	description: string;
-	features: string[];
+	features: string;
 	price: string;
 	discount: string;
 	mainImage: string;
-	images: string[];
+	images: string;
+};
+export type CreateTourArgsInterface = {
+	name: string;
+	category: string;
+	rating: number;
+	location: string;
+	duration: string;
+	description: string;
+	features: string;
+	price: string;
+	discount: string;
+	mainImage: string;
+	images: string;
+	createdBy: string;
 };
 export type TourSearchArgsInterface = {
 	search: string;

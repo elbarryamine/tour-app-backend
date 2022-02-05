@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTour = exports.searchToursResolver = exports.getToursResolver = void 0;
+exports.createTourResolver = exports.searchToursResolver = exports.getToursResolver = void 0;
 const db_1 = __importDefault(require("../../db"));
+const validate_1 = require("../../functions/validate");
 function getToursResolver() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -69,11 +70,37 @@ function searchToursResolver(_, args) {
     });
 }
 exports.searchToursResolver = searchToursResolver;
-function updateTour(_, args) {
+function createTourResolver(_, args) {
     return __awaiter(this, void 0, void 0, function* () {
-        db_1.default.transaction((trx) => {
-            // trx("tour")
-        });
+        try {
+            if (!(0, validate_1.validateTour)(args))
+                throw new Error('Invalid tour fileds');
+            return new Promise((resolve, _) => {
+                db_1.default.transaction((trx) => __awaiter(this, void 0, void 0, function* () {
+                    const tour = {
+                        name: args.name,
+                        description: args.description,
+                        discount: args.discount,
+                        duration: args.duration,
+                        price: args.price,
+                        rating: args.rating,
+                        location: JSON.stringify(args.location),
+                        features: JSON.stringify(args.features),
+                        category: JSON.stringify(args.category),
+                        createdBy: '2',
+                        mainImage: '',
+                        images: JSON.stringify(['']),
+                    };
+                    yield trx('tour').insert(tour);
+                    resolve(tour);
+                })).catch((err) => {
+                    throw new Error('Something Went Wrong');
+                });
+            });
+        }
+        catch (e) {
+            return [];
+        }
     });
 }
-exports.updateTour = updateTour;
+exports.createTourResolver = createTourResolver;

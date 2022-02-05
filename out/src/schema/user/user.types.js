@@ -19,18 +19,20 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserSignInSchemaType = exports.UserSignUpSchemaType = void 0;
+exports.UserSignInSchemaArgs = exports.UserSignUnSchemaArgs = void 0;
 const Graphql = __importStar(require("graphql"));
-exports.UserSignUpSchemaType = {
+exports.UserSignUnSchemaArgs = {
     email: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
     password: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
 };
-exports.UserSignInSchemaType = {
+exports.UserSignInSchemaArgs = {
     firstName: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
     lastName: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
     email: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
     phone: { type: Graphql.GraphQLString },
     password: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-    passwordConfirm: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+    passwordConfirm: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+    },
     birthDate: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
 };

@@ -19,18 +19,18 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TourSearchArgs = exports.TourImagesArgs = exports.TourArgs = exports.SearchTourSchema = exports.GetTourSchema = void 0;
+exports.createTourArgs = exports.TourSearchArgs = exports.TourArgs = exports.CreateTourSchema = exports.TourSchema = void 0;
 const Graphql = __importStar(require("graphql"));
-exports.GetTourSchema = new Graphql.GraphQLObjectType({
+exports.TourSchema = new Graphql.GraphQLObjectType({
     name: 'Tour',
     fields() {
-        return Object.assign(Object.assign({}, exports.TourArgs), exports.TourImagesArgs);
+        return exports.TourArgs;
     },
 });
-exports.SearchTourSchema = new Graphql.GraphQLObjectType({
-    name: 'SearchTour',
+exports.CreateTourSchema = new Graphql.GraphQLObjectType({
+    name: 'CreateTour',
     fields() {
-        return exports.TourSearchArgs;
+        return exports.TourArgs;
     },
 });
 exports.TourArgs = {
@@ -56,18 +56,19 @@ exports.TourArgs = {
         type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
     },
     price: {
-        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
     },
     discount: {
-        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
     },
-};
-exports.TourImagesArgs = {
     mainImage: {
         type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
     },
     images: {
         type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
+    },
+    createdBy: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
     },
 };
 exports.TourSearchArgs = {
@@ -88,5 +89,34 @@ exports.TourSearchArgs = {
     },
     duration: {
         type: Graphql.GraphQLString,
+    },
+};
+exports.createTourArgs = {
+    name: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+    },
+    category: {
+        type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
+    },
+    rating: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    },
+    location: {
+        type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
+    },
+    duration: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+    },
+    description: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+    },
+    features: {
+        type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
+    },
+    price: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    },
+    discount: {
+        type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
     },
 };

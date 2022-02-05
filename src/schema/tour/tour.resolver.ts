@@ -1,7 +1,12 @@
 import { Knex } from 'knex';
 import knex from '../../db';
+import { validateTour } from '../../functions/validate';
 // import { validateTour } from '../../functions/validate';
-import { TourArgsInterface, TourSearchArgsInterface } from './tour.types';
+import {
+	TourArgsInterface,
+	TourSearchArgsInterface,
+	CreateTourArgsInterface,
+} from './tour.types';
 
 export async function getToursResolver() {
 	try {
@@ -55,9 +60,39 @@ export async function searchToursResolver(
 		return [];
 	}
 }
-
-export async function updateTour(_: never, args: TourArgsInterface) {
-	knex.transaction((trx) => {
-		// trx("tour")
-	});
+export async function createTourResolver(
+	_: any,
+	args: CreateTourArgsInterface
+) {
+	try {
+		if (!validateTour(args)) throw new Error('Invalid tour fileds');
+		return new Promise((resolve, _) => {
+			knex.transaction(
+				async (
+					trx: Knex.Transaction<CreateTourArgsInterface, any[]>
+				) => {
+					const tour = {
+						name: args.name,
+						description: args.description,
+						discount: args.discount,
+						duration: args.duration,
+						price: args.price,
+						rating: args.rating,
+						location: JSON.stringify(args.location),
+						features: JSON.stringify(args.features),
+						category: JSON.stringify(args.category),
+						createdBy: '2',
+						mainImage: '',
+						images: JSON.stringify(['']),
+					};
+					await trx('tour').insert(tour);
+					resolve(tour);
+				}
+			).catch((err) => {
+				throw new Error('Something Went Wrong');
+			});
+		});
+	} catch (e) {
+		return [];
+	}
 }
