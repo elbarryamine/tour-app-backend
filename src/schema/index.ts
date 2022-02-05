@@ -1,35 +1,40 @@
 import * as Graphql from 'graphql';
-import { TourType, GetTourType } from './tour/tour.types';
-import { createTourResolver, getToursResolver } from './tour/tour.resolver';
+import {
+	GetTourSchema,
+	// TourArgs,
+	SearchTourSchema,
+	TourSearchArgs,
+} from './tour/tour.types';
+import { getToursResolver, searchToursResolver } from './tour/tour.resolver';
 import { UserSignInSchemaType } from './user/user.types';
-import { signInUser, signUpUser } from './user/user.resolver';
+import { logInUser, signUpUser } from './user/user.resolver';
 
 const rootSchema = new Graphql.GraphQLSchema({
 	query: new Graphql.GraphQLObjectType({
 		name: 'Query',
 		fields: () => ({
 			getTours: {
-				type: new Graphql.GraphQLList(GetTourType),
+				type: new Graphql.GraphQLList(GetTourSchema),
 				resolve: getToursResolver,
 			},
-			SignIn: {
+			signIn: {
 				type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
-				resolve: signInUser,
+				resolve: logInUser,
 			},
 		}),
 	}),
 	mutation: new Graphql.GraphQLObjectType({
 		name: 'Mutation',
 		fields: () => ({
-			createTour: {
-				type: Graphql.GraphQLBoolean,
-				args: TourType,
-				resolve: createTourResolver,
-			},
-			SignUp: {
+			signUp: {
 				type: Graphql.GraphQLBoolean,
 				args: UserSignInSchemaType,
 				resolve: signUpUser,
+			},
+			searchTour: {
+				type: new Graphql.GraphQLList(GetTourSchema),
+				args: TourSearchArgs,
+				resolve: searchToursResolver,
 			},
 		}),
 	}),

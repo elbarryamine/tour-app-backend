@@ -5,12 +5,14 @@ import rootSchema from './schema';
 import * as dotenv from 'dotenv';
 import { GraphQLError } from 'graphql';
 import multer from 'multer';
+import tourRouter from './router/tours';
 dotenv.config();
 const upload = multer({ dest: 'uploads/' });
 
 const app = express();
 app.use(cors());
 
+app.use(tourRouter);
 app.use(
 	'/graphql',
 	graphqlHTTP({

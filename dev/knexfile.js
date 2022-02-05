@@ -12,9 +12,7 @@ module.exports = {
 			port: 3306,
 		},
 		migrations: {},
-		seeds: {
-			directory: './seeds',
-		},
+		seeds: {},
 	},
 
 	staging: {
@@ -27,6 +25,7 @@ module.exports = {
 			port: 3306,
 		},
 		migrations: {},
+		seeds: {},
 	},
 
 	production: {
@@ -39,5 +38,6 @@ module.exports = {
 			port: 3306,
 		},
 		migrations: {},
+		seeds: {},
 	},
 };

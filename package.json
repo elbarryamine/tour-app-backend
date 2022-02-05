@@ -5,7 +5,7 @@
 	"author": "elbarryamine <mslmislam5@gmail.com>",
 	"license": "MIT",
 	"scripts": {
-		"start": "nodemon ./out/server.js",
+		"start": "nodemon ./out/src/server.js",
 		"tsc": "tsc -w",
 		"migrate": "knex migrate:latest --migrations-directory ./out/migrations"
 	},
