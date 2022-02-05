@@ -78,14 +78,28 @@ export async function createTourResolver(
 						duration: args.duration,
 						price: args.price,
 						rating: args.rating,
+						location: args.location,
+						features: args.features,
+						category: args.category,
+						createdBy: '2',
+						mainImage: [''],
+						images: '',
+					};
+					const dbTour = {
+						name: args.name,
+						description: args.description,
+						discount: args.discount,
+						duration: args.duration,
+						price: args.price,
+						rating: args.rating,
+						createdBy: '2',
+						mainImage: '',
 						location: JSON.stringify(args.location),
 						features: JSON.stringify(args.features),
 						category: JSON.stringify(args.category),
-						createdBy: '2',
-						mainImage: '',
 						images: JSON.stringify(['']),
 					};
-					await trx('tour').insert(tour);
+					await trx('tour').insert(dbTour);
 					resolve(tour);
 				}
 			).catch((err) => {
