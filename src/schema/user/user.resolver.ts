@@ -4,10 +4,12 @@ import { validateUserSignUp } from '../../services/functions/validate';
 import bycrpt from 'bcrypt';
 import { Knex } from 'knex';
 import { errors } from '../../services/errors';
+import Jwt from 'jsonwebtoken';
 
 type PropertiesOptional = Pick<Partial<UserSignUpType>, 'passwordConfirm'>;
 type WithoutPassConfirm = Omit<UserSignInType, 'passwordConfirm'>;
 type FormData = PropertiesOptional & WithoutPassConfirm;
+
 export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {
 	try {
 		if (
@@ -59,12 +61,13 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
 				if (!isValidPassword) {
 					throw new Error(errors.wrong_email_or_password);
 				}
-				return 'token';
+				const accessToken = Jwt.sign(user, process.env.PRIVATE_KEY, {
+					expiresIn: '3d',
+				});
+				return accessToken;
 			}
 		);
 	} catch (e: any) {
 		throw new Error(e.message || errors.something_went_wrong);
 	}
-	// compare password
-	// generate and send token
 }
