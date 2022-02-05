@@ -1,12 +1,13 @@
 import { Knex } from 'knex';
-import knex from '../../db';
-import { validateTour } from '../../functions/validate';
+import knex from '../../services/knex';
+import { validateTour } from '../../services/functions/validate';
 import {
 	TourArgsInterface,
 	TourSearchArgsInterface,
 	CreateTourArgsInterface,
 	DeleteTourArgsInterface,
 } from './tours.interfaces';
+import { errors } from '../../services/errors';
 
 export async function getToursResolver() {
 	try {
@@ -15,11 +16,11 @@ export async function getToursResolver() {
 				const tours = await trx('tour').select('*');
 				resolve(tours);
 			}).catch((err) => {
-				throw new Error('Something Went Wrong');
+				throw new Error(errors.something_went_wrong);
 			});
 		});
-	} catch (e) {
-		return [];
+	} catch (e: any) {
+		throw new Error(e.message || errors.something_went_wrong);
 	}
 }
 export async function searchToursResolver(
@@ -53,11 +54,11 @@ export async function searchToursResolver(
 					resolve(tours);
 				}
 			).catch((err) => {
-				throw new Error('Something Went Wrong');
+				throw new Error(errors.something_went_wrong);
 			});
 		});
-	} catch (e) {
-		return [];
+	} catch (e: any) {
+		throw new Error(e.message || errors.something_went_wrong);
 	}
 }
 export async function createTourResolver(
@@ -66,49 +67,47 @@ export async function createTourResolver(
 ) {
 	try {
 		// check if have access
-		if (!validateTour(args)) throw new Error('Invalid tour fileds');
-		return new Promise((resolve, _) => {
-			knex.transaction(
-				async (
-					trx: Knex.Transaction<CreateTourArgsInterface, any[]>
-				) => {
-					const tour = {
-						name: args.name,
-						description: args.description,
-						discount: args.discount,
-						duration: args.duration,
-						price: args.price,
-						rating: args.rating,
-						location: args.location,
-						features: args.features,
-						category: args.category,
-						createdBy: '2',
-						mainImage: [''],
-						images: '',
-					};
-					const dbTour = {
-						name: args.name,
-						description: args.description,
-						discount: args.discount,
-						duration: args.duration,
-						price: args.price,
-						rating: args.rating,
-						createdBy: '2',
-						mainImage: '',
-						location: JSON.stringify(args.location),
-						features: JSON.stringify(args.features),
-						category: JSON.stringify(args.category),
-						images: JSON.stringify(['']),
-					};
-					await trx('tour').insert(dbTour);
-					resolve(tour);
-				}
-			).catch((err) => {
-				throw new Error('Something Went Wrong');
-			});
-		});
-	} catch (e) {
-		return [];
+		if (!validateTour(args)) throw new Error(errors.invalid_fields);
+		return await knex.transaction(
+			async (trx: Knex.Transaction<CreateTourArgsInterface, any[]>) => {
+				const tour = {
+					name: args.name,
+					description: args.description,
+					discount: args.discount,
+					duration: args.duration,
+					price: args.price,
+					rating: args.rating,
+					location: args.location,
+					features: args.features,
+					category: args.category,
+					createdBy: '2',
+					mainImage: [''],
+					images: '',
+				};
+				const dbTour = {
+					name: args.name,
+					description: args.description,
+					discount: args.discount,
+					duration: args.duration,
+					price: args.price,
+					rating: args.rating,
+					createdBy: '2',
+					mainImage: '',
+					location: JSON.stringify(args.location),
+					features: JSON.stringify(args.features),
+					category: JSON.stringify(args.category),
+					images: JSON.stringify(['']),
+				};
+				await trx('tour')
+					.insert(dbTour)
+					.catch((e) => {
+						throw new Error(errors.something_went_wrong);
+					});
+				return tour;
+			}
+		);
+	} catch (e: any) {
+		throw new Error(e.message || errors.something_went_wrong);
 	}
 }
 
@@ -118,9 +117,13 @@ export async function deleteTourResolver(
 ) {
 	// check if have access
 	try {
-		await knex.table('tour').where('id', '=', args.id).del();
+		await knex
+			.table('tour')
+			.where('id', '=', args.id)
+			.del()
+			.catch(() => new Error(errors.something_went_wrong));
 		return true;
-	} catch (e) {
-		return false;
+	} catch (e: any) {
+		throw new Error(e.message || errors.something_went_wrong);
 	}
 }

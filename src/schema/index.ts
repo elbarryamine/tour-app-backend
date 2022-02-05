@@ -12,7 +12,7 @@ import {
 	getToursResolver,
 	searchToursResolver,
 } from './tour/tour.resolver';
-import { UserSignInSchemaArgs } from './user/user.types';
+import { UserSignInSchemaArgs, UserSignUpSchemaArgs } from './user/user.types';
 import { logInUser, signUpUser } from './user/user.resolver';
 
 const rootSchema = new Graphql.GraphQLSchema({
@@ -23,8 +23,14 @@ const rootSchema = new Graphql.GraphQLSchema({
 				type: new Graphql.GraphQLList(TourSchema),
 				resolve: getToursResolver,
 			},
+			searchTour: {
+				type: new Graphql.GraphQLList(TourSchema),
+				args: TourSearchArgs,
+				resolve: searchToursResolver,
+			},
 			signIn: {
 				type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+				args: UserSignInSchemaArgs,
 				resolve: logInUser,
 			},
 		}),
@@ -34,13 +40,8 @@ const rootSchema = new Graphql.GraphQLSchema({
 		fields: () => ({
 			signUp: {
 				type: Graphql.GraphQLBoolean,
-				args: UserSignInSchemaArgs,
+				args: UserSignUpSchemaArgs,
 				resolve: signUpUser,
-			},
-			searchTour: {
-				type: new Graphql.GraphQLList(TourSchema),
-				args: TourSearchArgs,
-				resolve: searchToursResolver,
 			},
 			createTour: {
 				type: CreateTourSchema,
