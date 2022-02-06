@@ -5,6 +5,7 @@ import {
 	TourSearchArgs,
 	createTourArgs,
 	deleteTourArgs,
+	TourArgs,
 } from './tour/tour.types';
 import {
 	createTourResolver,

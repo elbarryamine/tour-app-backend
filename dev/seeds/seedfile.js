@@ -35,7 +35,7 @@ exports.seed = async function (knex) {
 			description: faker.lorem.words(),
 			price: faker.datatype.number(),
 			discount: faker.datatype.number(),
-			mainImage: faker.random.words(),
+			mainImage: faker.random.image(),
 			images: JSON.stringify([
 				faker.random.image(),
 				faker.random.image(),

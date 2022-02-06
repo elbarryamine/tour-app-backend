@@ -12,7 +12,9 @@ const app = express();
 app.use(cors());
 
 app.get('/', (req, res) => {
-	res.send('Working');
+	res.status(200).json({
+		data: 'Working',
+	});
 });
 app.use(tourRouter);
 app.use(

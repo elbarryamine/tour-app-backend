@@ -1,4 +1,5 @@
 export type TourArgsInterface = {
+	id: string;
 	name: string;
 	category: string;
 	rating: number;

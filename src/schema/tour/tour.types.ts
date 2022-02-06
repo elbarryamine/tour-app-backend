@@ -14,6 +14,9 @@ export const CreateTourSchema = new Graphql.GraphQLObjectType({
 });
 
 export const TourArgs = {
+	id: {
+		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+	},
 	name: {
 		type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
 	},
