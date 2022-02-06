@@ -24,6 +24,22 @@ exports.seed = async function (knex) {
   await knex('user').insert(seedsUser)
   let seedsTour = []
   for (let i = 0; i < 10; i++) {
+    const categories = ['Quad', 'Beach', 'Mountain', 'Hiking', 'Ballon']
+    const feature = ['Support Kids', 'breakfast', 'Dinner']
+    const selectedCategories = []
+    const selectedFeatures = []
+    feature.forEach((el) => {
+      if (Math.floor(Math.random() * 2) == 1) selectedFeatures.push(el)
+    })
+    categories.forEach((el) => {
+      if (Math.floor(Math.random() * 2) == 1) selectedCategories.push(el)
+    })
+    if (!selectedFeatures.length) {
+      selectedFeatures.push(feature[Math.floor(Math.random() * feature.length + 0)])
+    }
+    if (!selectedCategories.length) {
+      selectedCategories.push(categories[Math.floor(Math.random() * categories.length + 0)])
+    }
     seedsTour.push({
       name: faker.name.title(),
       rating: faker.datatype.number({ min: 1, max: 5 }),
@@ -34,8 +50,8 @@ exports.seed = async function (knex) {
       mainImage: faker.random.image(),
       images: JSON.stringify([faker.random.image(), faker.random.image(), faker.random.image()]),
       location: JSON.stringify([faker.address.city(), faker.address.city(), faker.address.city()]),
-      features: JSON.stringify([faker.random.word(), faker.random.word(), faker.random.word()]),
-      category: JSON.stringify([faker.random.word(), faker.random.word(), faker.random.word()]),
+      features: JSON.stringify(selectedFeatures),
+      category: JSON.stringify(selectedCategories),
       createdBy: i,
     })
   }

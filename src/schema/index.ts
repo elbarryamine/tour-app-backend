@@ -19,6 +19,9 @@ const rootSchema = new Graphql.GraphQLSchema({
         type: new Graphql.GraphQLList(TourSchema),
         resolve: getToursResolver,
       },
+      // getToursBy: {
+
+      // },
       searchTour: {
         type: new Graphql.GraphQLList(TourSchema),
         args: TourSearchArgs,

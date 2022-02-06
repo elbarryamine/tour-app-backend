@@ -1,4 +1,4 @@
-export type TourArgsInterface = {
+export type TourInterface = {
   id: string
   name: string
   category: string
@@ -11,22 +11,10 @@ export type TourArgsInterface = {
   discount: string
   mainImage: string
   images: string
-}
-export type CreateTourArgsInterface = {
-  name: string
-  category: string
-  rating: number
-  location: string
-  duration: string
-  description: string
-  features: string
-  price: string
-  discount: string
-  mainImage: string
-  images: string
   createdBy: string
+  createdAt: string
 }
-export type TourSearchArgsInterface = {
+export type TourSearchInterface = {
   search: string
   type: string
   priceRangeMin: string
@@ -34,6 +22,6 @@ export type TourSearchArgsInterface = {
   date: string
   duration: string
 }
-export type DeleteTourArgsInterface = {
+export type DeleteTourInterface = {
   id: string
 }

@@ -13,7 +13,7 @@ type FormData = PropertiesOptional & WithoutPassConfirm
 export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {
   try {
     if (!validateUserSignUp(args) || args.password !== args.passwordConfirm) {
-      throw new Error('Invalid Data')
+      throw new Error(errors.invalid_fields)
     }
     const userInDb = await knex('user')
       .where('email', '=', args.email)
@@ -52,7 +52,7 @@ export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {
 export async function logInUser(_: any, args: UserSignInType, ctx: any) {
   // look for provided username in db
   try {
-    return await knex.transaction(async (trx: Knex.Transaction<UserSignUpType, any[]>) => {
+    return await knex.transaction(async (trx: Knex.Transaction<UserSignUpType, UserSignUpType[]>) => {
       const user = await trx('user').where('email', '=', args.email).first()
       if (!user) {
         throw new Error(errors.wrong_email_or_password)
@@ -70,3 +70,4 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
     throw new Error(e.message || errors.something_went_wrong)
   }
 }
+async function isUserHaveAccessToApp(_: any, args: { token: string }) {}
