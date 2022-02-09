@@ -25,8 +25,24 @@ export async function getPopularToursResolver() {
   try {
     return new Promise((resolve, _) => {
       knex
-        .transaction(async (trx) => {
+        .transaction(async (trx: Knex.Transaction<TourInterface, TourInterface[]>) => {
           const tours = await trx('tour').select('*')
+          resolve(tours)
+        })
+        .catch((err) => {
+          throw new Error(errors.something_went_wrong)
+        })
+    })
+  } catch (e: any) {
+    throw new Error(e.message || errors.something_went_wrong)
+  }
+}
+export async function getLatestToursResolver() {
+  try {
+    return new Promise((resolve, _) => {
+      knex
+        .transaction(async (trx: Knex.Transaction<TourInterface, TourInterface[]>) => {
+          const tours = await trx('tour').select('*').orderBy('createdAt')
           resolve(tours)
         })
         .catch((err) => {

@@ -43,7 +43,7 @@ exports.seed = async function (knex) {
     seedsTour.push({
       name: faker.name.title(),
       rating: faker.datatype.number({ min: 1, max: 5 }),
-      duration: faker.datatype.string(),
+      duration: faker.datatype.number({ min: 1, max: 5 }).toString() + 'h',
       description: faker.lorem.words(),
       price: faker.datatype.number(),
       discount: faker.datatype.number(),
