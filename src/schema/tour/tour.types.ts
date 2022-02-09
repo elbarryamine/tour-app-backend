@@ -9,7 +9,7 @@ export const TourSchema = new Graphql.GraphQLObjectType({
 export const CreateTourSchema = new Graphql.GraphQLObjectType({
   name: 'CreateTour',
   fields() {
-    return TourArgs
+    return createTourArgs
   },
 })
 
@@ -52,6 +52,9 @@ export const TourArgs = {
   },
   createdBy: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+  },
+  numberOfbooked: {
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
   },
 }
 export const TourSearchArgs = {

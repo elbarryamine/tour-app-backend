@@ -6,7 +6,7 @@ exports.up = async function (knex) {
       table.string('email', 255).unique().notNullable()
       table.string('phone', 255).unique()
       table.string('password', 255).notNullable()
-      table.string('roles', 255).notNullable().defaultTo('user')
+      table.string('role', 255).notNullable().defaultTo('user')
       table.timestamp('birthDate').notNullable()
       table.timestamp('createdAt').defaultTo(knex.fn.now())
       table.string('avatar')
@@ -15,6 +15,8 @@ exports.up = async function (knex) {
     .createTable('tour', function (table) {
       table.string('name', 255).notNullable()
       table.integer('rating').notNullable()
+      table.integer('numberOfbooked').defaultTo(0)
+      table.enu('active', ['0', '1']).defaultTo('0')
       table.string('duration').notNullable()
       table.string('description').notNullable()
       table.integer('price').notNullable()

@@ -1,41 +1,40 @@
 {
-	"name": "tourlex",
-	"version": "1.0.0",
-	"main": "index.js",
-	"author": "elbarryamine <mslmislam5@gmail.com>",
-	"license": "MIT",
-	"scripts": {
-		"start": "nodemon ./out/src/server.js",
-		"tsc": "tsc -w",
-		"migrate": "knex migrate:latest --migrations-directory ./out/migrations"
-	},
-	"dependencies": {
-		"@types/bcrypt": "^5.0.0",
-		"@types/cors": "^2.8.12",
-		"@types/dotenv": "^8.2.0",
-		"@types/express": "^4.17.13",
-		"@types/express-graphql": "^0.9.0",
-		"@types/faker": "^5.5.9",
-		"@types/graphql": "^14.5.0",
-		"@types/graphql-upload": "^8.0.7",
-		"@types/joi": "^17.2.3",
-		"@types/jsonwebtoken": "^8.5.8",
-		"@types/multer": "^1.4.7",
-		"bcrypt": "^5.0.1",
-		"cors": "^2.8.5",
-		"dotenv": "^10.0.0",
-		"express": "^4.17.1",
-		"express-graphql": "^0.12.0",
-		"faker": "^5.5.3",
-		"graphql": "^16.2.0",
-		"graphql-upload": "^13.0.0",
-		"joi": "^17.5.0",
-		"jsonwebtoken": "^8.5.1",
-		"knex": "^0.95.14",
-		"multer": "^1.4.4",
-		"mysql2": "^2.3.3"
-	},
-	"devDependencies": {
-		"nodemon": "^2.0.15"
-	}
+  "name": "tourlex",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "elbarryamine <mslmislam5@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./out/src/server.js",
+    "tsc": "tsc -w"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/express-graphql": "^0.9.0",
+    "@types/faker": "^5.5.9",
+    "@types/graphql": "^14.5.0",
+    "@types/graphql-upload": "^8.0.7",
+    "@types/joi": "^17.2.3",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/multer": "^1.4.7",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.12.0",
+    "faker": "^5.5.3",
+    "graphql": "^16.2.0",
+    "graphql-upload": "^13.0.0",
+    "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.95.14",
+    "multer": "^1.4.4",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }

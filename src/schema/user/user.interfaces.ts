@@ -9,6 +9,9 @@ export type UserSignUpType = {
   birthDate: string
   avatar: string
 }
+export type UserRole = {
+  role: 'super' | 'admin' | 'user'
+}
 
 export type UserSignInType = {
   email: string

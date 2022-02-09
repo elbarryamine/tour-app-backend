@@ -14,6 +14,17 @@ export type TourInterface = {
   createdBy: string
   createdAt: string
 }
+export type CreateTourInterface = {
+  name: string
+  category: string
+  rating: number
+  location: string
+  duration: string
+  description: string
+  features: string
+  price: string
+  discount: string
+}
 export type TourSearchInterface = {
   search: string
   type: string

@@ -1,13 +1,6 @@
 import * as Graphql from 'graphql'
-import {
-  TourSchema,
-  CreateTourSchema,
-  TourSearchArgs,
-  createTourArgs,
-  deleteTourArgs,
-  TourArgs,
-} from './tour/tour.types'
-import { createTourResolver, deleteTourResolver, getToursResolver, searchToursResolver } from './tour/tour.resolver'
+import { TourSchema, CreateTourSchema, TourSearchArgs, createTourArgs, deleteTourArgs } from './tour/tour.types'
+import { createTourResolver, deleteTourResolver, getToursResolver, searchToursResolver } from './tour/resolvers'
 import { UserSignInSchemaArgs, UserSignUpSchemaArgs } from './user/user.types'
 import { logInUser, signUpUser } from './user/user.resolver'
 
