@@ -1,8 +1,9 @@
 import * as Graphql from 'graphql'
-import { TourSchema, CreateTourSchema, TourSearchArgs, createTourArgs, deleteTourArgs } from './tour/tour.types'
+import { TOUR_SEARCH_ARGS, CREATE_TOUR_ARGS, DELETE_TOUR_ARGS } from './tour/tour.args'
 import { createTourResolver, deleteTourResolver, getToursResolver, searchToursResolver } from './tour/resolvers'
-import { UserSignInSchemaArgs, UserSignUpSchemaArgs } from './user/user.types'
-import { logInUser, signUpUser } from './user/user.resolver'
+import { UserSignInSchemaArgs, UserSignUpSchemaArgs } from './user/user.args'
+import { TourSchema, CreateTourSchema } from './tour/tour.schema'
+import { logInUser, isUserHaveAccessToApp, signUpUser } from './user/resolvers'
 
 const rootSchema = new Graphql.GraphQLSchema({
   query: new Graphql.GraphQLObjectType({
@@ -12,18 +13,22 @@ const rootSchema = new Graphql.GraphQLSchema({
         type: new Graphql.GraphQLList(TourSchema),
         resolve: getToursResolver,
       },
-      // getToursBy: {
-
-      // },
       searchTour: {
         type: new Graphql.GraphQLList(TourSchema),
-        args: TourSearchArgs,
+        args: TOUR_SEARCH_ARGS,
         resolve: searchToursResolver,
       },
       signIn: {
         type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
         args: UserSignInSchemaArgs,
         resolve: logInUser,
+      },
+      verifyUser: {
+        type: Graphql.GraphQLBoolean,
+        args: {
+          token: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+        },
+        resolve: isUserHaveAccessToApp,
       },
     }),
   }),
@@ -37,12 +42,12 @@ const rootSchema = new Graphql.GraphQLSchema({
       },
       createTour: {
         type: CreateTourSchema,
-        args: createTourArgs,
+        args: CREATE_TOUR_ARGS,
         resolve: createTourResolver,
       },
       deleteTour: {
         type: Graphql.GraphQLBoolean,
-        args: deleteTourArgs,
+        args: DELETE_TOUR_ARGS,
         resolve: deleteTourResolver,
       },
     }),

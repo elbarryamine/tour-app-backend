@@ -1,9 +1,10 @@
 import { Knex } from 'knex'
 import knex from '../../../../services/knex'
 import { validateTour } from '../../../../services/functions/validate'
-import { TourInterface, CreateTourInterface } from '../../tours.interfaces'
+import { TourInterface, CreateTourInterface } from '../../tours.types'
 import { errors } from '../../../../services/errors'
 import { VerifyIsAdmin } from '../../../../services/functions/verifyToken'
+import { DeleteTourInterface } from '../../tours.types'
 
 export async function createTourResolver(_: any, args: CreateTourInterface, ctx: any) {
   try {
@@ -45,6 +46,23 @@ export async function createTourResolver(_: any, args: CreateTourInterface, ctx:
           discount: args.discount,
         }
       })
+    }
+  } catch (e: any) {
+    throw new Error(e.message || errors.something_went_wrong)
+  }
+}
+
+export async function deleteTourResolver(_: any, args: DeleteTourInterface, ctx: any) {
+  // check if have access
+  try {
+    const decoded = VerifyIsAdmin(ctx)
+    if (decoded) {
+      await knex
+        .table('tour')
+        .where('id', '=', args.id)
+        .del()
+        .catch(() => new Error(errors.something_went_wrong))
+      return true
     }
   } catch (e: any) {
     throw new Error(e.message || errors.something_went_wrong)

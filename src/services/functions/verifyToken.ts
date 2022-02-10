@@ -2,7 +2,7 @@ import { errors } from '../errors'
 import Jwt from 'jsonwebtoken'
 import knex from '../../services/knex'
 import { Knex } from 'knex'
-import { UserRole, UserSignUpType } from '../../schema/user/user.interfaces'
+import { UserRole, UserSignUpType } from '../../schema/user/user.types'
 export function VerifyToken(ctx: any): { id: string } {
   if (ctx.headers.authorization && ctx.headers.authorization.startsWith('Bearer')) {
     const token = ctx.headers.authorization.split(' ')[1]
@@ -14,6 +14,14 @@ export function VerifyToken(ctx: any): { id: string } {
     }
   } else {
     throw new Error(errors.missing_header_token)
+  }
+}
+export function VerifyTokenString(token: string): { id: string } {
+  const decoded: any = Jwt.verify(token, process.env.PRIVATE_KEY)
+  if (decoded) {
+    return decoded.id
+  } else {
+    throw new Error(errors.missing_access_permission)
   }
 }
 

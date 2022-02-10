@@ -1,10 +1,8 @@
-import { UserSignInType, UserSignUpType } from './user.interfaces'
-import knex from '../../services/knex'
-import { validateUserSignUp } from '../../services/functions/validate'
+import { UserSignInType, UserSignUpType } from '../../user.types'
+import knex from '../../../../services/knex'
+import { validateUserSignUp } from '../../../../services/functions/validate'
 import bycrpt from 'bcrypt'
-import { Knex } from 'knex'
-import { errors } from '../../services/errors'
-import Jwt from 'jsonwebtoken'
+import { errors } from '../../../../services/errors'
 
 type PropertiesOptional = Pick<Partial<UserSignUpType>, 'passwordConfirm'>
 type WithoutPassConfirm = Omit<UserSignInType, 'passwordConfirm'>
@@ -35,7 +33,7 @@ export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {
     const user: FormData = { ...args }
     delete user.passwordConfirm
     const hashedPassword = await bycrpt.hash(user.password, 10)
-    knex('user')
+    await knex('user')
       .insert({
         ...user,
         avatar: '',
@@ -49,25 +47,3 @@ export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {
     throw new Error(e.message || errors.something_went_wrong)
   }
 }
-export async function logInUser(_: any, args: UserSignInType, ctx: any) {
-  // look for provided username in db
-  try {
-    return await knex.transaction(async (trx: Knex.Transaction<UserSignUpType, UserSignUpType[]>) => {
-      const user = await trx('user').where('email', '=', args.email).first()
-      if (!user) {
-        throw new Error(errors.wrong_email_or_password)
-      }
-      const isValidPassword = await bycrpt.compare(args.password, user.password)
-      if (!isValidPassword) {
-        throw new Error(errors.wrong_email_or_password)
-      }
-      const accessToken = Jwt.sign({ id: user.id }, process.env.PRIVATE_KEY, {
-        expiresIn: '3d',
-      })
-      return accessToken
-    })
-  } catch (e: any) {
-    throw new Error(e.message || errors.something_went_wrong)
-  }
-}
-async function isUserHaveAccessToApp(_: any, args: { token: string }) {}

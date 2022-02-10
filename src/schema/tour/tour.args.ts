@@ -1,19 +1,5 @@
 import * as Graphql from 'graphql'
-
-export const TourSchema = new Graphql.GraphQLObjectType({
-  name: 'Tour',
-  fields() {
-    return TourArgs
-  },
-})
-export const CreateTourSchema = new Graphql.GraphQLObjectType({
-  name: 'CreateTour',
-  fields() {
-    return createTourArgs
-  },
-})
-
-export const TourArgs = {
+export const TOUR_ARGS = {
   id: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
   },
@@ -30,7 +16,7 @@ export const TourArgs = {
     type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
   },
   duration: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
   },
   description: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
@@ -57,7 +43,7 @@ export const TourArgs = {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
   },
 }
-export const TourSearchArgs = {
+export const TOUR_SEARCH_ARGS = {
   search: {
     type: Graphql.GraphQLString,
   },
@@ -78,7 +64,7 @@ export const TourSearchArgs = {
   },
 }
 
-export const createTourArgs = {
+export const CREATE_TOUR_ARGS = {
   name: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
   },
@@ -92,7 +78,7 @@ export const createTourArgs = {
     type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
   },
   duration: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
   },
   description: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
@@ -107,7 +93,7 @@ export const createTourArgs = {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
   },
 }
-export const deleteTourArgs = {
+export const DELETE_TOUR_ARGS = {
   id: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
   },

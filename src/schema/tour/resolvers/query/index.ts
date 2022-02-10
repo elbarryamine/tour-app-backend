@@ -1,6 +1,6 @@
 import { Knex } from 'knex'
 import knex from '../../../../services/knex'
-import { TourInterface, TourSearchInterface } from '../../tours.interfaces'
+import { TourInterface, TourSearchInterface } from '../../tours.types'
 import { errors } from '../../../../services/errors'
 import { VerifyIsAdmin, VerifyIsSuperAdmin } from '../../../../services/functions/verifyToken'
 

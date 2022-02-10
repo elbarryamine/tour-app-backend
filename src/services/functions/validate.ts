@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import { CreateTourInterface } from '../../schema/tour/tours.interfaces'
-import { UserSignUpType } from '../../schema/user/user.interfaces'
+import { CreateTourInterface } from '../../schema/tour/tours.types'
+import { UserSignUpType } from '../../schema/user/user.types'
 export function validateTour(tour: CreateTourInterface) {
   const schema = Joi.object({
     name: Joi.string().min(3).max(255).required().alphanum(),

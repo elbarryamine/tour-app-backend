@@ -11,6 +11,7 @@ export type TourInterface = {
   discount: string
   mainImage: string
   images: string
+  numberOfbooked: number
   createdBy: string
   createdAt: string
 }

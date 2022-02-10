@@ -1,18 +1,19 @@
-import * as Graphql from 'graphql'
-
-export const UserSignInSchemaArgs = {
-  email: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-  password: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+export type UserSignUpType = {
+  id: string
+  firstName: string
+  lastName: string
+  email: string
+  phone: string
+  password: string
+  passwordConfirm: string
+  birthDate: string
+  avatar: string
+}
+export type UserRole = {
+  role: 'super' | 'admin' | 'user'
 }
 
-export const UserSignUpSchemaArgs = {
-  firstName: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-  lastName: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-  email: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-  phone: { type: Graphql.GraphQLString },
-  password: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-  passwordConfirm: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
-  },
-  birthDate: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+export type UserSignInType = {
+  email: string
+  password: string
 }
