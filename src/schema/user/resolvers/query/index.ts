@@ -4,8 +4,11 @@ import bycrpt from 'bcrypt'
 import { Knex } from 'knex'
 import { errors } from '../../../../services/errors'
 import Jwt from 'jsonwebtoken'
-import { VerifyTokenString } from '../../../../services/functions/verifyToken'
+import { VerifyToken } from '../../../../services/functions/verifyToken'
 
+type Optional = Pick<Partial<UserSignUpType>, 'password'>
+type UserWithoutPassword = Omit<UserSignUpType, 'password'>
+type UserWithOptionalPassword = Optional & UserWithoutPassword
 export async function logInUser(_: any, args: UserSignInType, ctx: any) {
   // look for provided username in db
   try {
@@ -21,14 +24,23 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
       const accessToken = Jwt.sign({ id: user.id }, process.env.PRIVATE_KEY, {
         expiresIn: '3d',
       })
-      return accessToken
+      ctx.res.cookie('token', accessToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        maxAge: 1000 * 60 * 60 * 24 * 3, // 3 days,
+      })
+      const _user: UserWithOptionalPassword = user
+      delete _user.password
+      return _user
     })
   } catch (e: any) {
-    console.log(e.message)
     throw new Error(e.message || errors.something_went_wrong)
   }
 }
-export async function isUserHaveAccessToApp(_: any, args: { token: string }) {
-  VerifyTokenString(args.token)
-  return true
+export async function isUserHaveAccessToApp(_: any, args: any, ctx: any) {
+  if (VerifyToken(ctx)) {
+    return true
+  } else {
+    return false
+  }
 }

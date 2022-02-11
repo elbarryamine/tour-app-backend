@@ -4,8 +4,8 @@ import knex from '../../services/knex'
 import { Knex } from 'knex'
 import { UserRole, UserSignUpType } from '../../schema/user/user.types'
 export function VerifyToken(ctx: any): { id: string } {
-  if (ctx.headers.authorization && ctx.headers.authorization.startsWith('Bearer')) {
-    const token = ctx.headers.authorization.split(' ')[1]
+  if (ctx.cookies.token) {
+    const token = ctx.cookies.token
     const decoded: any = Jwt.verify(token, process.env.PRIVATE_KEY)
     if (decoded) {
       return decoded.id
@@ -13,18 +13,9 @@ export function VerifyToken(ctx: any): { id: string } {
       throw new Error(errors.missing_access_permission)
     }
   } else {
-    throw new Error(errors.missing_header_token)
+    throw new Error(errors.missing_token)
   }
 }
-export function VerifyTokenString(token: string): { id: string } {
-  const decoded: any = Jwt.verify(token, process.env.PRIVATE_KEY)
-  if (decoded) {
-    return decoded.id
-  } else {
-    throw new Error(errors.missing_access_permission)
-  }
-}
-
 type UserWithRole = UserSignUpType & UserRole
 
 export function VerifyIsAdmin(ctx: any): { id: string } {

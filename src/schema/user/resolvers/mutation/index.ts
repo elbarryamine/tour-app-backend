@@ -5,7 +5,7 @@ import bycrpt from 'bcrypt'
 import { errors } from '../../../../services/errors'
 
 type PropertiesOptional = Pick<Partial<UserSignUpType>, 'passwordConfirm'>
-type WithoutPassConfirm = Omit<UserSignInType, 'passwordConfirm'>
+type WithoutPassConfirm = Omit<UserSignUpType, 'passwordConfirm'>
 type FormData = PropertiesOptional & WithoutPassConfirm
 
 export async function signUpUser(_: any, args: UserSignUpType, ctx: any) {

@@ -16,3 +16,14 @@ export const UserSignUpSchemaArgs = {
   },
   birthDate: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
 }
+export const UserSchemaArgs = {
+  id: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  firstName: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  lastName: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  email: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  phone: { type: Graphql.GraphQLString },
+  role: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  birthDate: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  createdAt: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+  avatar: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
+}

@@ -4,6 +4,7 @@ import { createTourResolver, deleteTourResolver, getToursResolver, searchToursRe
 import { UserSignInSchemaArgs, UserSignUpSchemaArgs } from './user/user.args'
 import { TourSchema, CreateTourSchema } from './tour/tour.schema'
 import { logInUser, isUserHaveAccessToApp, signUpUser } from './user/resolvers'
+import { UserSchema } from './user/user.schema'
 
 const rootSchema = new Graphql.GraphQLSchema({
   query: new Graphql.GraphQLObjectType({
@@ -19,15 +20,12 @@ const rootSchema = new Graphql.GraphQLSchema({
         resolve: searchToursResolver,
       },
       signIn: {
-        type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+        type: new Graphql.GraphQLNonNull(UserSchema),
         args: UserSignInSchemaArgs,
         resolve: logInUser,
       },
       verifyUser: {
         type: Graphql.GraphQLBoolean,
-        args: {
-          token: { type: new Graphql.GraphQLNonNull(Graphql.GraphQLString) },
-        },
         resolve: isUserHaveAccessToApp,
       },
     }),

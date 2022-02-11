@@ -1,4 +1,6 @@
-exports.up = async function (knex) {
+import { Knex } from 'knex'
+
+export async function up(knex: Knex): Promise<void> {
   return knex.schema
     .createTable('user', function (table) {
       table.string('firstName', 255).notNullable()
@@ -14,10 +16,10 @@ exports.up = async function (knex) {
     })
     .createTable('tour', function (table) {
       table.string('name', 255).notNullable()
-      table.integer('rating').notNullable()
+      table.enum('rating', [1, 2, 3, 4, 5]).notNullable()
       table.integer('numberOfbooked').defaultTo(0)
       table.enu('active', ['0', '1']).defaultTo('0')
-      table.string('duration').notNullable()
+      table.decimal('duration').notNullable()
       table.string('description').notNullable()
       table.integer('price').notNullable()
       table.integer('discount').notNullable()
@@ -55,7 +57,7 @@ exports.up = async function (knex) {
     })
 }
 
-exports.down = async function (knex) {
+export async function down(knex: Knex): Promise<void> {
   return knex.schema
     .dropTable('user')
     .dropTable('tour')

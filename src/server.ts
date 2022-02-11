@@ -6,10 +6,17 @@ import * as dotenv from 'dotenv'
 import { GraphQLError } from 'graphql'
 import multer from 'multer'
 import tourRouter from './router/tours'
+import cookieParser from 'cookie-parser'
 dotenv.config()
 const upload = multer({ dest: 'uploads/' })
 const app = express()
-app.use(cors())
+app.use(
+  cors({
+    origin: 'http://localhost:8080',
+    credentials: true,
+  })
+)
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
   res.status(200).json({

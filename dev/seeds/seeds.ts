@@ -1,6 +1,7 @@
-const faker = require('faker')
+import { Knex } from 'knex'
+import faker from 'faker'
 
-exports.seed = async function (knex) {
+export async function seed(knex: Knex): Promise<void> {
   // Deletes ALL existing entries
   await knex('user').del()
   await knex('tour').del()
@@ -43,7 +44,7 @@ exports.seed = async function (knex) {
     seedsTour.push({
       name: faker.name.title(),
       rating: faker.datatype.number({ min: 1, max: 5 }),
-      duration: faker.datatype.number({ min: 1, max: 5 }).toString() + 'h',
+      duration: faker.datatype.number({ min: 1, max: 5 }),
       description: faker.lorem.words(),
       price: faker.datatype.number(),
       discount: faker.datatype.number(),

@@ -11,7 +11,8 @@ export async function getToursResolver() {
     return new Promise((resolve, _) => {
       knex
         .transaction(async (trx) => {
-          const tours = await trx('tour').select('*').where('active', '=', '1')
+          const tours = await trx('tour').select('*')
+          // .where('active', '=', '1')
           resolve(tours)
         })
         .catch((err) => {
