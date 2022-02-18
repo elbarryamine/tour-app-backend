@@ -59,7 +59,7 @@ export async function deleteTourResolver(_: any, args: DeleteTourInterface, ctx:
     if (decoded) {
       await knex
         .table('tour')
-        .where('id', '=', args.id)
+        .whereIn('id', args.ids)
         .del()
         .catch(() => new Error(errors.something_went_wrong))
       return true

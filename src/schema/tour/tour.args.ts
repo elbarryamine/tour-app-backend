@@ -94,7 +94,7 @@ export const CREATE_TOUR_ARGS = {
   },
 }
 export const DELETE_TOUR_ARGS = {
-  id: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
+  ids: {
+    type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
   },
 }

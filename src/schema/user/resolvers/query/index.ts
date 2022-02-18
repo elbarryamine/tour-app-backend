@@ -13,7 +13,7 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
   // look for provided username in db
   try {
     return await knex.transaction(async (trx: Knex.Transaction<UserSignUpType, UserSignUpType[]>) => {
-      const user = await trx('user').where('email', '=', args.email).first()
+      const user = await trx('user').where('email', '=', args.email).limit(1).first()
       if (!user) {
         throw new Error(errors.wrong_email_or_password)
       }

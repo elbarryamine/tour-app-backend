@@ -35,5 +35,5 @@ export type TourSearchInterface = {
   duration: string
 }
 export type DeleteTourInterface = {
-  id: string
+  ids: string[]
 }
