@@ -27,11 +27,10 @@ const cors_1 = __importDefault(require("cors"));
 const express_graphql_1 = require("express-graphql");
 const schema_1 = __importDefault(require("./schema"));
 const dotenv = __importStar(require("dotenv"));
-const multer_1 = __importDefault(require("multer"));
 const tours_1 = __importDefault(require("./router/tours"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 dotenv.config();
-const upload = (0, multer_1.default)({ dest: 'uploads/' });
+// const upload = multer({ dest: 'uploads/' })
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: 'http://localhost:8080',

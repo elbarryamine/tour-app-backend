@@ -28,10 +28,10 @@ dotenv.config();
 const db = (0, knex_1.default)({
     client: 'mysql2',
     connection: {
-        host: process.env.PLANETSCALE_DB_HOST,
-        database: process.env.PLANETSCALE_DB_NAME,
-        user: process.env.PLANETSCALE_DB_USER,
-        password: process.env.PLANETSCALE_DB_PASSWORD,
+        host: process.env.DB_HOST,
+        database: process.env.DB_NAME,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
         port: 3306,
     },
 });

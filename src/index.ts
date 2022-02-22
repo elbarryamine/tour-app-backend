@@ -8,7 +8,7 @@ import multer from 'multer'
 import tourRouter from './router/tours'
 import cookieParser from 'cookie-parser'
 dotenv.config()
-const upload = multer({ dest: 'uploads/' })
+// const upload = multer({ dest: 'uploads/' })
 const app = express()
 app.use(
   cors({
