@@ -5,8 +5,8 @@
   "author": "elbarryamine <mslmislam5@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npx tsc -w",
-    "dev": "npx nodemon"
+    "start": "node ./out/src/index.js",
+    "tsc": "tsc -w"
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.0",

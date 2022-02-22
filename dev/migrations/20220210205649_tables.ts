@@ -28,7 +28,7 @@ export async function up(knex: Knex): Promise<void> {
       table.json('location').notNullable()
       table.json('features').notNullable()
       table.json('category').notNullable()
-      table.uuid('createdBy').notNullable().references('id').inTable('user').onUpdate('CASCADE').onDelete('CASCADE')
+      table.uuid('createdBy').notNullable()
       table.timestamp('createdAt').defaultTo(knex.fn.now())
       table.uuid('id').primary().defaultTo(knex.raw('(UUID())'))
     })
@@ -42,7 +42,7 @@ export async function up(knex: Knex): Promise<void> {
     .createTable('booking', function (table) {
       table.string('title', 255).notNullable()
       table.string('userLocation', 255).notNullable()
-      table.uuid('tourId').notNullable().references('id').inTable('tour').onUpdate('CASCADE').onDelete('CASCADE')
+      table.uuid('tourId').notNullable()
       table.timestamp('startDate')
       table.timestamp('createdAt').defaultTo(knex.fn.now())
       table.uuid('id').primary().defaultTo(knex.raw('(UUID())'))
@@ -51,8 +51,8 @@ export async function up(knex: Knex): Promise<void> {
     .createTable('review', function (table) {
       table.enu('rating', [1, 2, 3, 4, 5]).notNullable()
       table.string('description').notNullable()
-      table.uuid('tourId').notNullable().references('id').inTable('tour').onUpdate('CASCADE').onDelete('CASCADE')
-      table.uuid('userId').notNullable().references('id').inTable('user').onUpdate('CASCADE').onDelete('CASCADE')
+      table.uuid('tourId').notNullable()
+      table.uuid('userId').notNullable()
       table.uuid('id').primary().defaultTo(knex.raw('(UUID())'))
     })
 }
