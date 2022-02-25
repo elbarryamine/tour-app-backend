@@ -3,7 +3,7 @@ require('dotenv').config({ path: '../../.env' })
 
 module.exports = {
   development: {
-    client: 'mysql2',
+    client: 'mysql',
     connection: {
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
@@ -16,7 +16,7 @@ module.exports = {
   },
 
   staging: {
-    client: 'mysql2',
+    client: 'mysql',
     connection: {
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
@@ -30,7 +30,7 @@ module.exports = {
   },
 
   production: {
-    client: 'mysql2',
+    client: 'mysql',
     connection: {
       host: process.env.DB_HOST,
       database: process.env.DB_NAME,
