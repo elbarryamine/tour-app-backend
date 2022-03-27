@@ -10,13 +10,13 @@ export const TOUR_ARGS = {
     type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
   },
   rating: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLFloat),
   },
   location: {
     type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
   },
   duration: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLFloat),
   },
   description: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
@@ -25,10 +25,10 @@ export const TOUR_ARGS = {
     type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
   },
   price: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLFloat),
   },
   discount: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLFloat),
   },
   mainImage: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
@@ -39,8 +39,11 @@ export const TOUR_ARGS = {
   createdBy: {
     type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
   },
+  createdAt: {
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLFloat),
+  },
   numberOfbooked: {
-    type: new Graphql.GraphQLNonNull(Graphql.GraphQLInt),
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLFloat),
   },
 }
 export const TOUR_SEARCH_ARGS = {

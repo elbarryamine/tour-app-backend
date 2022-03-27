@@ -34,6 +34,7 @@ export async function logInUser(_: any, args: UserSignInType, ctx: any) {
       return _user
     })
   } catch (e: any) {
+    console.log(e.message)
     throw new Error(e.message || errors.something_went_wrong)
   }
 }

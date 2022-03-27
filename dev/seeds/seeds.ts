@@ -18,7 +18,6 @@ export async function seed(knex: Knex): Promise<void> {
       email: faker.internet.email(),
       phone: faker.phone.phoneNumber(),
       password: faker.random.words(),
-      birthDate: faker.date.past(5).toISOString().slice(0, 19).replace('T', ' '),
       avatar: faker.random.image(),
     })
   }

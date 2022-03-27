@@ -9,7 +9,6 @@ export async function up(knex: Knex): Promise<void> {
       table.string('phone', 255).unique()
       table.string('password', 255).notNullable()
       table.string('role', 255).notNullable().defaultTo('user')
-      table.timestamp('birthDate').notNullable()
       table.timestamp('createdAt').defaultTo(knex.fn.now())
       table.string('avatar')
       table.uuid('id').primary().defaultTo(knex.raw('(UUID())'))

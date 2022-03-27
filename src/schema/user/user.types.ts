@@ -6,7 +6,6 @@ export type UserSignUpType = {
   phone: string
   password: string
   passwordConfirm: string
-  birthDate: string
   avatar: string
 }
 export type UserRole = {

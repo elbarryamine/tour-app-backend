@@ -29,7 +29,6 @@ export function validateUserSignUp(user: UserSignUpType) {
     phone: Joi.string(),
     password: Joi.string().required(),
     passwordConfirm: Joi.string().required(),
-    birthDate: Joi.string().required(),
   })
   const result = schema.validate(user)
   if (result.error || result.warning) {
