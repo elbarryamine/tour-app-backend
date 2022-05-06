@@ -1,6 +1,12 @@
 import * as Graphql from 'graphql'
 import { TOUR_SEARCH_ARGS, CREATE_TOUR_ARGS, DELETE_TOUR_ARGS } from './tour/tour.args'
-import { createTourResolver, deleteTourResolver, getToursResolver, searchToursResolver } from './tour/resolvers'
+import {
+  createTourResolver,
+  deleteTourResolver,
+  getLatestToursResolver,
+  getToursResolver,
+  searchToursResolver,
+} from './tour/resolvers'
 import { UserSignInSchemaArgs, UserSignUpSchemaArgs } from './user/user.args'
 import { TourSchema, CreateTourSchema } from './tour/tour.schema'
 import { logInUser, isUserHaveAccessToApp, signUpUser } from './user/resolvers'
@@ -13,6 +19,10 @@ const rootSchema = new Graphql.GraphQLSchema({
       getTours: {
         type: new Graphql.GraphQLList(TourSchema),
         resolve: getToursResolver,
+      },
+      getLatestTours: {
+        type: new Graphql.GraphQLList(TourSchema),
+        resolve: getLatestToursResolver,
       },
       searchTour: {
         type: new Graphql.GraphQLList(TourSchema),

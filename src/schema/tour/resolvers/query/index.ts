@@ -3,60 +3,23 @@ import knex from '../../../../services/knex'
 import { TourInterface, TourSearchInterface } from '../../tours.types'
 import { errors } from '../../../../services/errors'
 import { VerifyIsAdmin, VerifyIsSuperAdmin } from '../../../../services/functions/verifyToken'
+import mongoose from 'mongoose'
+import { TourModel } from '../../../../model/toursModel'
 
 // User Access
 export async function getToursResolver() {
-  // user
   try {
-    return new Promise((resolve, _) => {
-      knex
-        .transaction(async (trx) => {
-          const tours = await trx('tour').select('*')
-          // .where('active', '=', '1')
-          resolve(tours)
-        })
-        .catch((err) => {
-          throw new Error(errors.something_went_wrong)
-        })
-    })
+    return await TourModel.find({})
   } catch (e: any) {
     throw new Error(e.message || errors.something_went_wrong)
   }
 }
 
-export async function getPopularToursResolver() {
-  // user
-
-  try {
-    return new Promise((resolve, _) => {
-      knex
-        .transaction(async (trx: Knex.Transaction<TourInterface, TourInterface[]>) => {
-          const tours = await trx('tour').select('*').where('active', '=', '1')
-          resolve(tours)
-        })
-        .catch((err) => {
-          throw new Error(errors.something_went_wrong)
-        })
-    })
-  } catch (e: any) {
-    throw new Error(e.message || errors.something_went_wrong)
-  }
-}
+export async function getPopularToursResolver() {}
 
 export async function getLatestToursResolver() {
-  // user
-
   try {
-    return new Promise((resolve, _) => {
-      knex
-        .transaction(async (trx: Knex.Transaction<TourInterface, TourInterface[]>) => {
-          const tours = await trx('tour').select('*').where('active', '=', '1').orderBy('createdAt')
-          resolve(tours)
-        })
-        .catch((err) => {
-          throw new Error(errors.something_went_wrong)
-        })
-    })
+    return await TourModel.find({}).limit(10).sort({ createdAt: 1 })
   } catch (e: any) {
     throw new Error(e.message || errors.something_went_wrong)
   }
