@@ -1,6 +1,7 @@
 import * as Graphql from 'graphql'
 import { UserSchemaArgs, UserSignInSchemaArgs, UserSignUpSchemaArgs } from './args'
-import { logInUser, isUserHaveAccessToApp, signUpUser } from './resolvers'
+import { logInUser, isUserHaveAccessToApp } from './query'
+import { signUpUser } from './mutation'
 
 const UserSchema = new Graphql.GraphQLObjectType({
   name: 'User',

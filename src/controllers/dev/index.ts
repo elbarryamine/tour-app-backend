@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import faker from 'faker'
-import { TourType, TourModel } from '../../model/toursModel'
-import { UsersModel, UserType } from '../../model/usersModel'
+import { TourType, TourModel } from '../../model/tours-model'
+import { UsersModel, UserType } from '../../model/users-model'
 
 export async function migrate(req: Request, res: Response, next: NextFunction) {
   try {
@@ -37,7 +37,7 @@ export async function migrate(req: Request, res: Response, next: NextFunction) {
         category: selectedCategories,
         createdBy: faker.lorem.words(),
         numberOfbooked: faker.datatype.number({ min: 1, max: 5 }),
-        active: Math.floor(Math.random() * 1 + 0),
+        active: Math.floor(Math.random() * 2),
       })
     }
     let seedsUser: Array<UserType> = []

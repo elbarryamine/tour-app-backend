@@ -1,14 +1,13 @@
 import * as Graphql from 'graphql'
 import { TOUR_SEARCH_ARGS, CREATE_TOUR_ARGS, TOUR_ARGS, DELETE_TOUR_ARGS, GET_TOUR_BY_USER_ID } from './args'
 import {
-  createTourResolver,
-  deleteTourResolver,
   getInActiveToursResolver,
   getLatestToursResolver,
   getToursOfAnyUserResolver,
   getToursResolver,
   searchToursResolver,
-} from './resolvers'
+} from './query'
+import { createTourResolver, deleteTourResolver } from './mutation'
 
 const TourSchema = new Graphql.GraphQLObjectType({
   name: 'Tour',

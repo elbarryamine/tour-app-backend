@@ -1,6 +1,6 @@
 import Joi from 'joi'
-import { CreateTourInterface } from '../../schema/tour/types'
-import { UserSignUpType } from '../../schema/user/types'
+import { CreateTourInterface } from '../../graphql/tour/types'
+import { UserSignUpType } from '../../graphql/user/types'
 export function validateTour(tour: CreateTourInterface) {
   const schema = Joi.object({
     name: Joi.string().min(3).max(255).required().alphanum(),

@@ -1,8 +1,8 @@
-import { GetTourByUserIdInterface, TourSearchInterface } from '../types'
-import { errors } from '../../../services/errors'
-import { VerifyIsSuperAdmin } from '../../../services/functions/verifyToken'
+import { GetTourByUserIdInterface, TourSearchInterface } from './types'
+import { errors } from '../../helpers/error-handing/errors'
+import { VerifyIsSuperAdmin } from '../../helpers/validation/verify-token'
 import mongoose from 'mongoose'
-import { TourModel, TourType } from '../../../model/toursModel'
+import { TourModel, TourType } from '../../model/tours-model'
 
 // User Access
 export async function getToursResolver() {

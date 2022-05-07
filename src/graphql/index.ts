@@ -2,7 +2,7 @@ import * as Graphql from 'graphql'
 import { tourMutation, tourQuery } from './tour/schema'
 import { userMutation, userQuery } from './user/schema'
 
-const rootSchema = new Graphql.GraphQLSchema({
+const Schema = new Graphql.GraphQLSchema({
   query: new Graphql.GraphQLObjectType({
     name: 'Query',
     fields: () => ({
@@ -19,4 +19,4 @@ const rootSchema = new Graphql.GraphQLSchema({
   }),
 })
 
-export default rootSchema
+export default Schema

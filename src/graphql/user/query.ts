@@ -1,9 +1,9 @@
-import { UserSignInType, UserSignUpType } from '../types'
+import { UserSignInType, UserSignUpType } from './types'
 import bycrpt from 'bcrypt'
-import { errors } from '../../../services/errors'
+import { errors } from '../../helpers/error-handing/errors'
 import Jwt from 'jsonwebtoken'
-import { VerifyToken } from '../../../services/functions/verifyToken'
-import { UsersModel } from '../../../model/usersModel'
+import { VerifyToken } from '../../helpers/validation/verify-token'
+import { UsersModel } from '../../model/users-model'
 
 type Optional = Pick<Partial<UserSignUpType>, 'password'>
 type UserWithoutPassword = Omit<UserSignUpType, 'password'>

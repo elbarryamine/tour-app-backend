@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import { graphqlHTTP } from 'express-graphql'
-import rootSchema from './schema'
+import Schema from './graphql'
 import * as dotenv from 'dotenv'
 import { GraphQLError } from 'graphql'
 // import multer from 'multer'
@@ -29,7 +29,7 @@ app.use(devRouter)
 app.use(
   '/graphql',
   graphqlHTTP({
-    schema: rootSchema,
+    schema: Schema,
     graphiql: true,
     customFormatErrorFn: ({ message, path }: GraphQLError) => {
       return { message, path }
@@ -40,6 +40,7 @@ app.use(
 process.on('unhandledRejection', (err: any) => {
   console.error(err.message)
 })
+
 const port = process.env.PORT || 3000
 app.listen(port, () => {
   console.log(`listening on port ${port}`)

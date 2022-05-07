@@ -1,8 +1,8 @@
-import { UserSignUpType } from '../types'
-import { validateUserSignUp } from '../../../services/functions/validate'
+import { UserSignUpType } from './types'
+import { validateUserSignUp } from '../../helpers/validation/validate'
 import bycrpt from 'bcrypt'
-import { errors } from '../../../services/errors'
-import { UsersModel } from '../../../model/usersModel'
+import { errors } from '../../helpers/error-handing/errors'
+import { UsersModel } from '../../model/users-model'
 
 type PropertiesOptional = Pick<Partial<UserSignUpType>, 'passwordConfirm'>
 type WithoutPassConfirm = Omit<UserSignUpType, 'passwordConfirm'>
