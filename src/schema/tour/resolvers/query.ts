@@ -1,10 +1,10 @@
 import { Knex } from 'knex'
-import knex from '../../../../services/knex'
-import { GetTourByUserIdInterface, TourInterface, TourSearchInterface } from '../../types'
-import { errors } from '../../../../services/errors'
-import { VerifyIsAdmin, VerifyIsSuperAdmin } from '../../../../services/functions/verifyToken'
+import knex from '../../../services/knex'
+import { GetTourByUserIdInterface, TourInterface, TourSearchInterface } from '../types'
+import { errors } from '../../../services/errors'
+import { VerifyIsAdmin, VerifyIsSuperAdmin } from '../../../services/functions/verifyToken'
 import mongoose from 'mongoose'
-import { TourModel, TourType } from '../../../../model/toursModel'
+import { TourModel, TourType } from '../../../model/toursModel'
 
 // User Access
 export async function getToursResolver() {
@@ -31,9 +31,10 @@ export async function searchToursResolver(_: any, args: TourSearchInterface) {
     if (args.search)
       query['$or'] = [{ name: { $regex: `.*${args.search}.*` } }, { description: { $regex: `.*${args.search}.*` } }]
     if (args.type) query['category'] = { $regex: `.*${args.type}*.` }
-    if (args.priceRangeMin) query['price'] = { ...query['price'], $gt: args.priceRangeMin }
-    if (args.priceRangeMax) query['price'] = { ...query['price'], $lt: args.priceRangeMax }
+    if (args.priceRangeMin) query['price'] = { ...query['price'], $gte: args.priceRangeMin }
+    if (args.priceRangeMax) query['price'] = { ...query['price'], $lte: args.priceRangeMax }
     if (args.duration) query['duration'] = args.duration
+    console.log(query)
     return await TourModel.find(query)
   } catch (e: any) {
     throw new Error(e.message || errors.something_went_wrong)

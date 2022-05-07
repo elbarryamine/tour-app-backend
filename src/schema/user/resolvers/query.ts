@@ -1,10 +1,10 @@
-import { UserSignInType, UserSignUpType } from '../../types'
-import knex from '../../../../services/knex'
+import { UserSignInType, UserSignUpType } from '../types'
+import knex from '../../../services/knex'
 import bycrpt from 'bcrypt'
 import { Knex } from 'knex'
-import { errors } from '../../../../services/errors'
+import { errors } from '../../../services/errors'
 import Jwt from 'jsonwebtoken'
-import { VerifyToken } from '../../../../services/functions/verifyToken'
+import { VerifyToken } from '../../../services/functions/verifyToken'
 
 type Optional = Pick<Partial<UserSignUpType>, 'password'>
 type UserWithoutPassword = Omit<UserSignUpType, 'password'>

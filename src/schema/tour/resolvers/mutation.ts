@@ -1,10 +1,10 @@
 import { Knex } from 'knex'
-import knex from '../../../../services/knex'
-import { validateTour } from '../../../../services/functions/validate'
-import { TourInterface, CreateTourInterface } from '../../types'
-import { errors } from '../../../../services/errors'
-import { VerifyIsAdmin } from '../../../../services/functions/verifyToken'
-import { DeleteTourInterface } from '../../types'
+import knex from '../../../services/knex'
+import { validateTour } from '../../../services/functions/validate'
+import { TourInterface, CreateTourInterface } from '../types'
+import { errors } from '../../../services/errors'
+import { VerifyIsAdmin } from '../../../services/functions/verifyToken'
+import { DeleteTourInterface } from '../types'
 
 export async function createTourResolver(_: any, args: CreateTourInterface, ctx: any) {
   try {

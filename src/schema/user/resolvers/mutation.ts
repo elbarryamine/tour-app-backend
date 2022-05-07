@@ -1,8 +1,8 @@
-import { UserSignUpType } from '../../types'
-import knex from '../../../../services/knex'
-import { validateUserSignUp } from '../../../../services/functions/validate'
+import { UserSignUpType } from '../types'
+import knex from '../../../services/knex'
+import { validateUserSignUp } from '../../../services/functions/validate'
 import bycrpt from 'bcrypt'
-import { errors } from '../../../../services/errors'
+import { errors } from '../../../services/errors'
 
 type PropertiesOptional = Pick<Partial<UserSignUpType>, 'passwordConfirm'>
 type WithoutPassConfirm = Omit<UserSignUpType, 'passwordConfirm'>
