@@ -23,7 +23,7 @@ const CreateTourSchema = new Graphql.GraphQLObjectType({
   },
 })
 
-export const tourQuery = {
+export const tourQuery: Graphql.ThunkObjMap<Graphql.GraphQLFieldConfig<any, any, any>> = {
   getTours: {
     type: new Graphql.GraphQLList(TourSchema),
     resolve: getToursResolver,
@@ -48,7 +48,7 @@ export const tourQuery = {
   },
 }
 
-export const tourMutation = {
+export const tourMutation: Graphql.ThunkObjMap<Graphql.GraphQLFieldConfig<any, any, any>> = {
   createTour: {
     type: CreateTourSchema,
     args: CREATE_TOUR_ARGS,

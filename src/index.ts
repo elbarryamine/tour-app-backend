@@ -31,8 +31,8 @@ app.use(
   graphqlHTTP({
     schema: rootSchema,
     graphiql: true,
-    customFormatErrorFn: (err: GraphQLError) => {
-      return { message: err.message }
+    customFormatErrorFn: ({ message, path }: GraphQLError) => {
+      return { message, path }
     },
   })
 )

@@ -33,6 +33,5 @@ const toursSchema = new mongoose.Schema<TourType>({
   active: { type: Number, default: 0, enum: [0, 1] },
   category: { type: [String], required: true },
   createdAt: { type: Date, default: Date.now },
-  createdBy: { type: String, required: true },
 })
 export const TourModel = mongoose.model('Tours', toursSchema)

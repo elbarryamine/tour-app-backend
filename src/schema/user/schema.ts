@@ -7,7 +7,7 @@ const UserSchema = new Graphql.GraphQLObjectType({
   fields: () => UserSchemaArgs,
 })
 
-export const userQuery = {
+export const userQuery: Graphql.ThunkObjMap<Graphql.GraphQLFieldConfig<any, any, any>> = {
   signIn: {
     type: new Graphql.GraphQLNonNull(UserSchema),
     args: UserSignInSchemaArgs,
@@ -18,9 +18,9 @@ export const userQuery = {
     resolve: isUserHaveAccessToApp,
   },
 }
-export const userMutation = {
+export const userMutation: Graphql.ThunkObjMap<Graphql.GraphQLFieldConfig<any, any, any>> = {
   signUp: {
-    type: Graphql.GraphQLBoolean,
+    type: UserSchema,
     args: UserSignUpSchemaArgs,
     resolve: signUpUser,
   },

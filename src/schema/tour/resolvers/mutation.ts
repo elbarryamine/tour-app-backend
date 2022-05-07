@@ -5,6 +5,7 @@ import { TourInterface, CreateTourInterface } from '../types'
 import { errors } from '../../../services/errors'
 import { VerifyIsAdmin } from '../../../services/functions/verifyToken'
 import { DeleteTourInterface } from '../types'
+import { TourModel } from '../../../model/toursModel'
 
 export async function createTourResolver(_: any, args: CreateTourInterface, ctx: any) {
   try {
@@ -57,11 +58,7 @@ export async function deleteTourResolver(_: any, args: DeleteTourInterface, ctx:
   try {
     const decoded = VerifyIsAdmin(ctx)
     if (decoded) {
-      await knex
-        .table('tour')
-        .whereIn('id', args.ids)
-        .del()
-        .catch(() => new Error(errors.something_went_wrong))
+      await TourModel.deleteMany({ _id: args.ids })
       return true
     }
   } catch (e: any) {

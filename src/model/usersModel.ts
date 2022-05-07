@@ -14,7 +14,9 @@ const usersSchema = new mongoose.Schema({
   email: { type: String, required: true },
   phone: { type: String, required: true },
   password: { type: String, required: true },
-  image: { type: String, required: true },
+  image: { type: String, required: false },
+  role: { type: String, enum: ['admin', 'user', 'super'], default: 'user' },
+  createdAt: { type: Date, default: Date.now },
 })
 
 export const UsersModel = mongoose.model('Users', usersSchema)
