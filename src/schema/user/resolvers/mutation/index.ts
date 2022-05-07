@@ -1,4 +1,4 @@
-import { UserSignInType, UserSignUpType } from '../../user.types'
+import { UserSignUpType } from '../../types'
 import knex from '../../../../services/knex'
 import { validateUserSignUp } from '../../../../services/functions/validate'
 import bycrpt from 'bcrypt'

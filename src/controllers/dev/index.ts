@@ -1,5 +1,4 @@
 import { NextFunction, Request, Response } from 'express'
-import mongoose from 'mongoose'
 import faker from 'faker'
 import { TourType, TourModel } from '../../model/toursModel'
 import { UsersModel, UserType } from '../../model/usersModel'
@@ -37,6 +36,8 @@ export async function migrate(req: Request, res: Response, next: NextFunction) {
         features: selectedFeatures,
         category: selectedCategories,
         createdBy: faker.lorem.words(),
+        numberOfbooked: faker.datatype.number({ min: 1, max: 5 }),
+        active: Math.floor(Math.random() * 1 + 0),
       })
     }
     let seedsUser: Array<UserType> = []

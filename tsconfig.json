@@ -7,8 +7,9 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true
-    // "baseUrl": "src"
+    "skipLibCheck": true,
+    "noUnusedLocals": true
+    // "baseUrl": "./src",
     // "paths": {
     //   "@services/*": ["services/*"],
     //   "@schema/*": ["schema/*"],

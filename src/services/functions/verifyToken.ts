@@ -2,7 +2,7 @@ import { errors } from '../errors'
 import Jwt from 'jsonwebtoken'
 import knex from '../../services/knex'
 import { Knex } from 'knex'
-import { UserRole, UserSignUpType } from '../../schema/user/user.types'
+import { UserRole, UserSignUpType } from '../../schema/user/types'
 export function VerifyToken(ctx: any): { id: string } {
   if (ctx.cookies.token) {
     const token = ctx.cookies.token

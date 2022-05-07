@@ -12,6 +12,8 @@ export interface TourType {
   location: Array<string>
   features: Array<string>
   category: Array<string>
+  numberOfbooked: number
+  active: number
   createdBy: string
   createdAt?: Date
 }
@@ -27,6 +29,8 @@ const toursSchema = new mongoose.Schema<TourType>({
   images: { type: [String], required: true },
   location: { type: [String], required: true },
   features: { type: [String], required: true },
+  numberOfbooked: { type: Number, default: 0 },
+  active: { type: Number, default: 0, enum: [0, 1] },
   category: { type: [String], required: true },
   createdAt: { type: Date, default: Date.now },
   createdBy: { type: String, required: true },

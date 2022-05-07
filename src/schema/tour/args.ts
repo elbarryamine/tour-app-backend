@@ -54,16 +54,16 @@ export const TOUR_SEARCH_ARGS = {
     type: Graphql.GraphQLString,
   },
   priceRangeMin: {
-    type: Graphql.GraphQLString,
+    type: Graphql.GraphQLInt,
   },
   priceRangeMax: {
-    type: Graphql.GraphQLString,
+    type: Graphql.GraphQLInt,
   },
   date: {
     type: Graphql.GraphQLString,
   },
   duration: {
-    type: Graphql.GraphQLString,
+    type: Graphql.GraphQLFloat,
   },
 }
 
@@ -99,5 +99,11 @@ export const CREATE_TOUR_ARGS = {
 export const DELETE_TOUR_ARGS = {
   ids: {
     type: new Graphql.GraphQLNonNull(new Graphql.GraphQLList(Graphql.GraphQLString)),
+  },
+}
+
+export const GET_TOUR_BY_USER_ID = {
+  id: {
+    type: new Graphql.GraphQLNonNull(Graphql.GraphQLString),
   },
 }

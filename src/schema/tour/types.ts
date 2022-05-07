@@ -29,11 +29,14 @@ export type CreateTourInterface = {
 export type TourSearchInterface = {
   search: string
   type: string
-  priceRangeMin: string
-  priceRangeMax: string
+  priceRangeMin: number
+  priceRangeMax: number
   date: string
-  duration: string
+  duration: number
 }
 export type DeleteTourInterface = {
   ids: string[]
+}
+export type GetTourByUserIdInterface = {
+  id: string
 }
